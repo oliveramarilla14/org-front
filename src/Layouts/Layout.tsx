@@ -4,6 +4,7 @@ import Header from './Header';
 type Props = ChildrenProps;
 
 export default function Layout({ children }: Props) {
+  //cambiar container por container de tailwind
   return (
     <>
       <Header />

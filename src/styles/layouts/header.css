@@ -12,13 +12,13 @@
   font-size: 30px;
   font-weight: bold;
   background: linear-gradient(to right,
-      #7953cd 20%,
-      #00affa 30%,
-      #0190cd 70%,
+      #0190cd 20%,
+      #7953cd 30%,
+      #00affa 70%,
       #764ada 80%);
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
   background-size: 500% auto;
-  animation: textShine 5s ease-in-out infinite alternate;
+  animation: textShine 3s ease-in-out infinite alternate;
 }
