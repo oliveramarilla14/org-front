@@ -1,5 +1,5 @@
-import { ModeToggle } from '@/components/toggle-theme';
 import '@/styles/layouts/header.css';
+import { ModeToggle } from '@/theme/toggle-theme';
 
 export default function Header() {
   return (
