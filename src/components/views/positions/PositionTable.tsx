@@ -1,6 +1,5 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Club, ClubStats } from '@/types/clubs';
-
 interface TeamStats extends ClubStats {
   Club: Pick<Club, 'name' | 'badge'>;
 }
@@ -10,7 +9,6 @@ type Props = {
 };
 
 export default function PositionTable({ teams }: Props) {
-  console.log(teams);
   return (
     <Table className='mt-4'>
       <TableHeader>
@@ -30,7 +28,7 @@ export default function PositionTable({ teams }: Props) {
       </TableHeader>
       <TableBody className='text-left'>
         {teams.map((team) => (
-          <TableRow className='text-lg'>
+          <TableRow className='text-lg' key={team.clubId}>
             <TableCell>{team.position}</TableCell>
             <TableCell className='flex flex-col items-center gap-1 font-bold text-lg'>
               {!!team.Club.badge && <img className='w-10' src={team.Club.badge} />}

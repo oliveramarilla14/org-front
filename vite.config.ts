@@ -1,4 +1,5 @@
 /// <reference types="vitest" />
+/// <reference types="vite/client" />
 
 import path from 'path';
 import { defineConfig } from 'vite';
@@ -9,7 +10,8 @@ export default defineConfig({
   plugins: [react()],
   test: {
     environment: 'jsdom',
-    globals: true
+    globals: true,
+    setupFiles: './src/tests/setup.ts'
   },
   resolve: {
     alias: {

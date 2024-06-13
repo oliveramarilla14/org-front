@@ -1,4 +1,4 @@
-import { ModeToggle } from '@/components/toggle-theme';
+import { ModeToggle } from '@/theme/toggle-theme';
 import { render, screen } from '@testing-library/react';
 
 describe('Theme', () => {
