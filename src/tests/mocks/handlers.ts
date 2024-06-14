@@ -1,7 +1,3 @@
-import { HttpResponse, http } from 'msw';
+import { positionsHandlers } from './uriHandlers/positionsHandlers';
 
-export const handlers = [
-  http.get('https://pokeapi.co/api/v2/pokemon/ditto', () => {
-    return HttpResponse.json({ name: 'oliver' });
-  })
-];
+export const handlers = [...positionsHandlers];

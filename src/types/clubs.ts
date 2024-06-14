@@ -18,3 +18,7 @@ export interface ClubStats {
   yellows: number;
   reds: number;
 }
+
+export interface TeamStats extends ClubStats {
+  Club: Pick<Club, 'name' | 'badge'>;
+}

@@ -19,12 +19,13 @@
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
+    "noImplicitAny": true,
     "types": ["vitest/globals"],
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
   },
-  "include": ["src", "./src/tests/setup.ts"],
+  "include": ["src", "src/tests/setup.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

@@ -1,5 +1,7 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Club, ClubStats } from '@/types/clubs';
+import { useEffect, useState } from 'react';
+
 interface TeamStats extends ClubStats {
   Club: Pick<Club, 'name' | 'badge'>;
 }
@@ -9,6 +11,12 @@ type Props = {
 };
 
 export default function PositionTable({ teams }: Props) {
+  const [empty, setEmpty] = useState(false);
+
+  useEffect(() => {
+    if (teams.length == 0) setEmpty(true);
+  }, [teams]);
+
   return (
     <Table className='mt-4'>
       <TableHeader>
@@ -27,6 +35,14 @@ export default function PositionTable({ teams }: Props) {
         </TableRow>
       </TableHeader>
       <TableBody className='text-left'>
+        {empty && (
+          <TableRow>
+            <TableCell className='text-center text-2xl' colSpan={11}>
+              No hay datos de los equipos
+            </TableCell>
+          </TableRow>
+        )}
+
         {teams.map((team) => (
           <TableRow className='text-lg' key={team.clubId}>
             <TableCell>{team.position}</TableCell>
