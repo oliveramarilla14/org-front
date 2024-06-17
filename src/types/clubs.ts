@@ -1,3 +1,5 @@
+import { PlayerStatsPayments } from './players';
+
 export interface Club {
   name: string;
   badge: null | string;
@@ -21,4 +23,9 @@ export interface ClubStats {
 
 export interface TeamStats extends ClubStats {
   Club: Pick<Club, 'name' | 'badge'>;
+}
+
+export interface TeamShow extends Club {
+  players: PlayerStatsPayments[];
+  Stats: TeamStats;
 }

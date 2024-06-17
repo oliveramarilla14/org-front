@@ -1,11 +1,6 @@
 import { CustomAxiosError } from '@/types/error';
 import axios from 'axios';
 
-export const fetcher2 = async <T>(url: string): Promise<T> => {
-  const { data } = await axios.get<T>(url);
-  return data;
-};
-
 export const fetcher = async (url: string) => {
   try {
     const { data } = await axios.get(url);

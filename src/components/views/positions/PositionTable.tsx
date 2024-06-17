@@ -8,30 +8,36 @@ interface TeamStats extends ClubStats {
 
 type Props = {
   teams: TeamStats[];
+  reduced?: boolean;
 };
 
-export default function PositionTable({ teams }: Props) {
+export default function PositionTable({ teams, reduced = false }: Props) {
   const [empty, setEmpty] = useState(false);
 
   useEffect(() => {
     if (teams.length == 0) setEmpty(true);
+    setEmpty(false);
   }, [teams]);
 
   return (
     <Table className='mt-4'>
       <TableHeader>
         <TableRow className='text-lg'>
-          <TableHead>Posición</TableHead>
+          <TableHead>Pos</TableHead>
           <TableHead className='text-center'>Club</TableHead>
           <TableHead>Puntos</TableHead>
           <TableHead>PJ</TableHead>
           <TableHead>PG</TableHead>
           <TableHead>PE</TableHead>
           <TableHead>PP</TableHead>
-          <TableHead>GF</TableHead>
-          <TableHead>GC</TableHead>
-          <TableHead>Amarilla</TableHead>
-          <TableHead>Rojas</TableHead>
+          {reduced || (
+            <>
+              <TableHead>GF</TableHead>
+              <TableHead>GC</TableHead>
+              <TableHead>Amarilla</TableHead>
+              <TableHead>Rojas</TableHead>
+            </>
+          )}
         </TableRow>
       </TableHeader>
       <TableBody className='text-left'>
@@ -47,7 +53,7 @@ export default function PositionTable({ teams }: Props) {
           <TableRow className='text-lg' key={team.clubId}>
             <TableCell>{team.position}</TableCell>
             <TableCell className='flex flex-col items-center gap-1 font-bold text-lg'>
-              {!!team.Club.badge && <img className='w-10' src={team.Club.badge} />}
+              {reduced || (!!team.Club.badge && <img className='w-10' src={team.Club.badge} />)}
               {team.Club.name}
             </TableCell>
             <TableCell>{team.points}</TableCell>
@@ -55,10 +61,14 @@ export default function PositionTable({ teams }: Props) {
             <TableCell>{team.win}</TableCell>
             <TableCell>{team.draw}</TableCell>
             <TableCell>{team.loose}</TableCell>
-            <TableCell>{team.goals}</TableCell>
-            <TableCell>{team.conceed}</TableCell>
-            <TableCell>{team.yellows}</TableCell>
-            <TableCell>{team.reds}</TableCell>
+            {reduced || (
+              <>
+                <TableCell>{team.goals}</TableCell>
+                <TableCell>{team.conceed}</TableCell>
+                <TableCell>{team.yellows}</TableCell>
+                <TableCell>{team.reds}</TableCell>
+              </>
+            )}
           </TableRow>
         ))}
       </TableBody>
