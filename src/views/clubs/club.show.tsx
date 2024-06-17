@@ -1,6 +1,5 @@
 import Layout from '@/Layouts/Layout';
 import Loading from '@/Layouts/Loading';
-import { fetcher } from '@/api/fetcher';
 import { Toaster } from '@/components/ui/toaster';
 import { useToast } from '@/components/ui/use-toast';
 import ShowClubData from '@/components/views/clubs/Show';
@@ -14,7 +13,7 @@ import useSWR from 'swr';
 export default function ClubShow() {
   const { id } = useParams();
 
-  const { data, isLoading, error } = useSWR<TeamShow, CustomAxiosError>(`${apiUri}/clubs/${id}`, fetcher);
+  const { data, isLoading, error } = useSWR<TeamShow, CustomAxiosError>(`${apiUri}/clubs/${id}`);
   const { toast } = useToast();
 
   useEffect(() => {

@@ -1,6 +1,5 @@
 import Layout from '@/Layouts/Layout';
 import Loading from '@/Layouts/Loading';
-import { fetcher } from '@/api/fetcher';
 import { Toaster } from '@/components/ui/toaster';
 import { useToast } from '@/components/ui/use-toast';
 import ClubItem from '@/components/views/clubs/ClubItem';
@@ -12,7 +11,7 @@ import { useEffect } from 'react';
 import useSWR from 'swr';
 
 export default function Clubs() {
-  const { data = [], isLoading, error } = useSWR<Club[], CustomAxiosError>(`${apiUri}/clubs`, fetcher);
+  const { data = [], isLoading, error } = useSWR<Club[], CustomAxiosError>(`${apiUri}/clubs`);
   const { toast } = useToast();
 
   useEffect(() => {

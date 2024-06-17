@@ -1,6 +1,5 @@
 import Layout from '@/Layouts/Layout';
 import Loading from '@/Layouts/Loading';
-import { fetcher } from '@/api/fetcher';
 import { Toaster } from '@/components/ui/toaster';
 import { useToast } from '@/components/ui/use-toast';
 import Header from '@/components/views/homepage/Header';
@@ -12,7 +11,7 @@ import { useEffect } from 'react';
 import useSWR from 'swr';
 
 export default function Positions() {
-  const { data = [], isLoading, error } = useSWR<TeamStats[], CustomAxiosError>(`${apiUri}/clubs/positions`, fetcher);
+  const { data = [], isLoading, error } = useSWR<TeamStats[], CustomAxiosError>(`${apiUri}/clubs/positions`);
   const { toast } = useToast();
 
   useEffect(() => {

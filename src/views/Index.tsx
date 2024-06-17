@@ -1,5 +1,4 @@
 import Layout from '@/Layouts/Layout';
-import { fetcher } from '@/api/fetcher';
 import Bento from '@/components/views/homepage/Bento';
 import Header from '@/components/views/homepage/Header';
 import PositionTable from '@/components/views/positions/PositionTable';
@@ -9,7 +8,8 @@ import { CustomAxiosError } from '@/types/error';
 import useSWR from 'swr';
 
 export default function Index() {
-  const { data: teams = [] } = useSWR<TeamStats[], CustomAxiosError>(`${apiUri}/clubs/positions`, fetcher);
+  const { data: teams = [] } = useSWR<TeamStats[], CustomAxiosError>(`${apiUri}/clubs/positions`);
+
   return (
     <Layout>
       <Header title='Exa Campoverde' />
