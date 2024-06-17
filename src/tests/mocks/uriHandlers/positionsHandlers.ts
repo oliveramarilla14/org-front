@@ -1,10 +1,11 @@
 import { HttpResponse, delay, http } from 'msw';
 import { apiUri } from '@/config/config';
+import { TeamStats } from '@/types/clubs';
 
 export const positionsHandlers = [
   http.get(`${apiUri}/clubs/positions`, async () => {
     await delay(1000);
-    return HttpResponse.json(teamsStats);
+    return HttpResponse.json<TeamStats[]>(teamsStats);
   })
 ];
 

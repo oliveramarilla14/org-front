@@ -13,6 +13,7 @@ import useSWR from 'swr';
 
 export default function ClubShow() {
   const { id } = useParams();
+
   const { data, isLoading, error } = useSWR<TeamShow, CustomAxiosError>(`${apiUri}/clubs/${id}`, fetcher);
   const { toast } = useToast();
 

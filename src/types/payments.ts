@@ -4,7 +4,7 @@ export interface Payment {
   playerId?: number;
   type: string;
   price: number;
-  deadline: Date;
+  deadline: string;
   paid: boolean;
-  paydate?: Date;
+  paydate: string | null;
 }

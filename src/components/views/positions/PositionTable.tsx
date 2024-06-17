@@ -15,8 +15,11 @@ export default function PositionTable({ teams, reduced = false }: Props) {
   const [empty, setEmpty] = useState(false);
 
   useEffect(() => {
-    if (teams.length == 0) setEmpty(true);
-    setEmpty(false);
+    if (teams.length == 0) {
+      setEmpty(true);
+    } else {
+      setEmpty(false);
+    }
   }, [teams]);
 
   return (

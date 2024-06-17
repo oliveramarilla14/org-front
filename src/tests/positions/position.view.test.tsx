@@ -1,17 +1,13 @@
 import Positions from '@/views/Positions.view';
-import { render, screen } from '@testing-library/react';
-import { SWRConfig } from 'swr';
+import { screen } from '@testing-library/react';
 import { server } from '../mocks/server';
 import { PositionError } from '../mocks/uriHandlers/positionsHandlers';
+import { testRender } from '@/helpers/testRender';
 
 describe('Positions Table View', () => {
   beforeEach((test) => {
     if (test.task.name !== 'Show error when fetch fails') {
-      render(
-        <SWRConfig value={{ provider: () => new Map() }}>
-          <Positions />
-        </SWRConfig>
-      );
+      testRender(<Positions />);
     }
   });
 
@@ -33,11 +29,7 @@ describe('Positions Table View', () => {
 
   it('Show error when fetch fails', async () => {
     server.use(PositionError);
-    render(
-      <SWRConfig value={{ provider: () => new Map() }}>
-        <Positions />
-      </SWRConfig>
-    );
+    testRender(<Positions />);
 
     await screen.findByText(/error indefinido/i);
   });

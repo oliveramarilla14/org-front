@@ -6,7 +6,7 @@ export interface Player {
   teamId: number;
   documentNumber: number;
   promYear: number;
-  phoneNumber?: number;
+  phoneNumber: number | null;
 }
 
 export interface PlayerStats {
@@ -24,5 +24,5 @@ export interface PlayerStats {
 
 export interface PlayerStatsPayments extends Player {
   payments: Payment[];
-  Stats: PlayerStats;
+  Stats: PlayerStats | null;
 }

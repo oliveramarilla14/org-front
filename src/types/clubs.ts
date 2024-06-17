@@ -27,5 +27,5 @@ export interface TeamStats extends ClubStats {
 
 export interface TeamShow extends Club {
   players: PlayerStatsPayments[];
-  Stats: TeamStats;
+  Stats: ClubStats | null;
 }
