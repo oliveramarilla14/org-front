@@ -5,6 +5,7 @@ import { ThemeProvider } from './theme/theme-provider';
 import Clubs from './views/clubs/Clubs.view';
 import NotFound from './Layouts/NotFound';
 import ClubShow from './views/clubs/club.show';
+import Test from './components/test';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Route path='/positions' element={<Positions />} />
           <Route path='/clubs' element={<Clubs />} />
           <Route path='/clubs/:id' element={<ClubShow />} />
+          <Route path='/test' element={<Test />} />
           <Route path='*' element={<NotFound />} />
         </Routes>
       </ThemeProvider>
