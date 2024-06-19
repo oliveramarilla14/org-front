@@ -6,6 +6,7 @@ import Clubs from './views/clubs/Clubs.view';
 import NotFound from './Layouts/NotFound';
 import ClubShow from './views/clubs/club.show';
 import Test from './components/test';
+import ClubCreate from './views/clubs/club.create';
 
 function App() {
   return (
@@ -14,8 +15,12 @@ function App() {
         <Routes>
           <Route path='/' element={<Index />} />
           <Route path='/positions' element={<Positions />} />
+
+          {/* clubes */}
           <Route path='/clubs' element={<Clubs />} />
+          <Route path='/clubs/crear' element={<ClubCreate />} />
           <Route path='/clubs/:id' element={<ClubShow />} />
+
           <Route path='/test' element={<Test />} />
           <Route path='*' element={<NotFound />} />
         </Routes>

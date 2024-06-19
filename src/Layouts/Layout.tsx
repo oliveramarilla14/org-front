@@ -6,12 +6,12 @@ import { HeadTitle } from '@/components/fonts/headers';
 
 type Props = {
   children: ReactNode;
-  isLoading: boolean;
+  isLoading?: boolean;
   title?: string;
   create?: boolean;
 };
 
-export default function Layout({ children, isLoading, title, create }: Props) {
+export default function Layout({ children, isLoading = false, title, create }: Props) {
   return (
     <>
       <Header />
