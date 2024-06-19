@@ -12,7 +12,23 @@ export const clubsHandlers = [
   })
 ];
 
-export const ClubsError = http.get(`${apiUri}/clubs/2`, () => {
+export const ClubError = http.get(`${apiUri}/clubs/2`, () => {
+  return HttpResponse.error();
+});
+
+export const ClubsError = http.get(`${apiUri}/clubs`, () => {
+  return HttpResponse.error();
+});
+
+export const clubsEmpty = http.get(`${apiUri}/clubs`, () => {
+  return HttpResponse.json([]);
+});
+
+export const clubEmpty = http.get(`${apiUri}/clubs/2`, () => {
+  return HttpResponse.json([]);
+});
+
+export const clubInvalidParam = http.get(`${apiUri}/clubs/prueba`, () => {
   return HttpResponse.error();
 });
 

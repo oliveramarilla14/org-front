@@ -2,7 +2,7 @@ import { testRender } from '@/helpers/testRender';
 import ClubShow from '@/views/clubs/club.show';
 import { screen } from '@testing-library/dom';
 import { server } from '../mocks/server';
-import { ClubsError } from '../mocks/uriHandlers/clubsHandlers';
+import { ClubError, clubEmpty } from '../mocks/uriHandlers/clubsHandlers';
 
 describe('Club show', () => {
   vi.mock('react-router-dom', async (importOriginal) => {
@@ -34,9 +34,14 @@ describe('Club show', () => {
   });
 
   it('Show error when fetch fails', async () => {
-    server.use(ClubsError);
+    server.use(ClubError);
     testRender(<ClubShow />);
 
     await screen.findByText(/error indefinido/i);
+  });
+
+  it('handle undefined data', async () => {
+    server.use(clubEmpty);
+    testRender(<ClubShow />);
   });
 });

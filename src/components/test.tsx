@@ -1,11 +1,10 @@
-import { useEffect, useState } from 'react';
-import Header from './views/homepage/Header';
+import { HeadTitle } from './fonts/headers';
 
 export default function Test() {
   return (
     <>
       <div data-testid='main'>
-        <Header title='Tests'></Header>
+        <HeadTitle>test</HeadTitle>
       </div>
     </>
   );

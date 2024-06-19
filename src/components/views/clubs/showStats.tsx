@@ -30,10 +30,10 @@ export default function ShowStats({ club }: Props) {
           </TableHeader>
           <TableBody>
             <TableRow>
-              <TableCell>{club?.Stats.position}</TableCell>
-              <TableCell>{club?.Stats.goals}</TableCell>
-              <TableCell>{club?.Stats.yellows}</TableCell>
-              <TableCell>{club?.Stats.reds}</TableCell>
+              <TableCell>{club?.Stats?.position ?? '-'}</TableCell>
+              <TableCell>{club?.Stats?.goals ?? '-'}</TableCell>
+              <TableCell>{club?.Stats?.yellows ?? '-'}</TableCell>
+              <TableCell>{club?.Stats?.reds ?? '-'}</TableCell>
             </TableRow>
           </TableBody>
         </Table>

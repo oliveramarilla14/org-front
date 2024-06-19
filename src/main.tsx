@@ -8,11 +8,7 @@ import { fetcher } from './api/fetcher.ts';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <SWRConfig
-      value={{
-        fetcher
-      }}
-    >
+    <SWRConfig value={{ fetcher }}>
       <BrowserRouter>
         <App />
       </BrowserRouter>
