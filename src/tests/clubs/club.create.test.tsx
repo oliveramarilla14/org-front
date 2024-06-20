@@ -3,6 +3,15 @@ import ClubCreate from '@/views/clubs/club.create';
 import { screen } from '@testing-library/dom';
 
 describe('Create Club', () => {
+  const ResizeObserverMock = vi.fn(() => ({
+    observe: vi.fn(),
+    unobserve: vi.fn(),
+    disconnect: vi.fn()
+  }));
+
+  // Stub the global ResizeObserver
+  vi.stubGlobal('ResizeObserver', ResizeObserverMock);
+
   beforeEach(() => {
     testRender(<ClubCreate />);
   });

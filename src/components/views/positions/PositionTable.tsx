@@ -1,4 +1,5 @@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
+import { storageUri } from '@/config/config';
 import { Club, ClubStats } from '@/types/clubs';
 import { useEffect, useState } from 'react';
 
@@ -56,7 +57,8 @@ export default function PositionTable({ teams, reduced = false }: Props) {
           <TableRow className='text-lg' key={team.clubId}>
             <TableCell>{team.position}</TableCell>
             <TableCell className='flex flex-col items-center gap-1 font-bold text-lg'>
-              {reduced || (!!team.Club.badge && <img className='w-10' src={team.Club.badge} />)}
+              {reduced ||
+                (!!team.Club.badge && <img className='w-10' src={`${storageUri}/files/badge/${team.Club.badge}`} />)}
               {team.Club.name}
             </TableCell>
             <TableCell>{team.points}</TableCell>

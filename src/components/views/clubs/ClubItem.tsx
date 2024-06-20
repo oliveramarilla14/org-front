@@ -3,6 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 
 import { Club } from '@/types/clubs';
 import { useNavigate } from 'react-router-dom';
+import { storageUri } from '@/config/config';
 
 interface Props {
   club: Club;
@@ -22,7 +23,7 @@ export default function ClubItem({ club, className, size }: Props) {
     >
       <CardHeader className='items-center gap-2'>
         <Avatar className='h-20 w-20'>
-          <AvatarImage src={club.badge || ''} />
+          <AvatarImage src={club?.badge ? `${storageUri}/files/badge/${club.badge}` : ''} className='object-cover' />
           <AvatarFallback>{club.name.slice(0, 2).toUpperCase()}</AvatarFallback>
         </Avatar>
         <CardTitle>{club.name}</CardTitle>
