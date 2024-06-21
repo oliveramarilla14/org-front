@@ -1,6 +1,5 @@
 import { Form, FormControl, FormDescription, FormField, FormItem, FormLabel, FormMessage } from '@/components/ui/form';
 import { zodResolver } from '@hookform/resolvers/zod';
-
 import { Input } from '@/components/ui/input';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
@@ -27,6 +26,7 @@ export default function ClubForm() {
   });
   const navigate = useNavigate();
   const fileRef = form.register('badge');
+
   async function onSubmit(values: FormType) {
     const saveData = new FormData();
     saveData.append('name', values.name);

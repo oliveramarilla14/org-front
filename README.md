@@ -1,5 +1,8 @@
 # Fast Tournament
 
+working on club form
+intentanto modularizar mas la logica
+
 ## Se debe testear
 
 - Render correctly
