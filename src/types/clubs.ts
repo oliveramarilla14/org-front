@@ -1,3 +1,4 @@
+import { z } from 'zod';
 import { PlayerStatsPayments } from './players';
 
 export interface Club {
@@ -29,3 +30,9 @@ export interface TeamShow extends Club {
   players: PlayerStatsPayments[];
   Stats: ClubStats | null;
 }
+
+export const clubFormSchema = z.object({
+  name: z.string().min(3, 'Mínimo de 3 caracteres').max(100, 'Máximo de 100 caracteres'),
+  badge: z.instanceof(FileList).optional(),
+  payment: z.boolean()
+});

@@ -22,7 +22,7 @@ export default function Clubs() {
       {data && (
         <div className='grid md:grid-cols-5 gap-5 mt-5 group'>
           {data.map((club) => (
-            <ClubItem key={club.id} club={club} size={5} />
+            <ClubItem key={club.id} club={club} size={1} />
           ))}
         </div>
       )}

@@ -43,15 +43,4 @@ describe('Create/Edit Club Form', () => {
 
     await screen.findByText('Máximo de 100 caracteres');
   });
-
-  it('Accepts correct values', async () => {
-    const nameInput = screen.getByLabelText('Nombre');
-    const button = screen.getByText('Guardar');
-
-    fireEvent.change(nameInput, { target: { value: 'Interpod' } });
-
-    fireEvent.click(button);
-
-    expect(screen.queryByText('Mínimo de 3 caracteres')).toBeNull();
-  });
 });

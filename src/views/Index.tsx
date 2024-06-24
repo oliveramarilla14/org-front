@@ -11,12 +11,14 @@ export default function Index() {
 
   return (
     <Layout isLoading={false} title='Exa Campoverde'>
-      <div className='grid md:grid-cols-5 gap-4 mt-4'>
-        <Bento title='Fixture' className='md:col-span-3' link='/' />
-        <Bento title='Tabla' className='md:col-span-2' link='positions'>
+      <div className='grid md:grid-cols-12 gap-4 mt-4'>
+        <Bento title='Fixture' className='md:col-span-7' link='/' />
+        <Bento title='Tabla' className='md:col-span-5 ' link='positions'>
           <PositionTable teams={teams} reduced />
         </Bento>
-        <Bento title='Equipos' className='md:col-span-2' link='/clubs' />
+        <Bento title='Equipos' className='md:col-span-4' link='/clubs' />
+        <Bento title='Jugadores' className='md:col-span-4' link='/players' />
+        <Bento title='Jugadores' className='md:col-span-4' link='/players' />
       </div>
     </Layout>
   );

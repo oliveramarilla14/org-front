@@ -9,6 +9,9 @@ export const clubsHandlers = [
   }),
   http.get(`${apiUri}/clubs/2`, async () => {
     return HttpResponse.json<TeamShow>(club);
+  }),
+  http.post(`${apiUri}/clubs`, async () => {
+    return HttpResponse.json<TeamShow>(club);
   })
 ];
 

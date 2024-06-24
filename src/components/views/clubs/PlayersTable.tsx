@@ -20,6 +20,13 @@ export default function PlayersTable({ players }: Props) {
         </TableRow>
       </TableHeader>
       <TableBody>
+        {players.length === 0 && (
+          <TableRow>
+            <TableCell className='text-center text-xl' colSpan={11}>
+              El equipo no tiene jugadores registrados
+            </TableCell>
+          </TableRow>
+        )}
         {players.map((player) => (
           <TableRow key={player.id}>
             <TableCell>{player.name}</TableCell>

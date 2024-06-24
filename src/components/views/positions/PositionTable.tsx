@@ -24,7 +24,7 @@ export default function PositionTable({ teams, reduced = false }: Props) {
   }, [teams]);
 
   return (
-    <Table className='mt-4'>
+    <Table className='mt-4 '>
       <TableHeader>
         <TableRow className='text-lg'>
           <TableHead>Pos</TableHead>

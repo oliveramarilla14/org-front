@@ -1,7 +1,6 @@
 # Fast Tournament
 
-working on club form
-intentanto modularizar mas la logica
+Create Form for new player, from the clubForm
 
 ## Se debe testear
 

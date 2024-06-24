@@ -5,25 +5,35 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
-import axios from 'axios';
 import { apiUri } from '@/config/config';
 import { useNavigate } from 'react-router-dom';
+import { clubFormSchema } from '@/types/clubs';
+import useSWRMutation from 'swr/mutation';
+import { createClubFetcher as fetcher } from '@/api/create';
+import { useToast } from '@/components/ui/use-toast';
+import { Toaster } from '@/components/ui/toaster';
 
-const formSchema = z.object({
-  name: z.string().min(3, 'Mínimo de 3 caracteres').max(100, 'Máximo de 100 caracteres'),
-  badge: z.instanceof(FileList).optional(),
-  payment: z.boolean()
-});
-type FormType = z.infer<typeof formSchema>;
+type FormType = z.infer<typeof clubFormSchema>;
 
 export default function ClubForm() {
   const form = useForm<FormType>({
-    resolver: zodResolver(formSchema),
+    resolver: zodResolver(clubFormSchema),
     defaultValues: {
       name: '',
       payment: false
     }
   });
+  const { toast } = useToast();
+
+  const { trigger, isMutating } = useSWRMutation(`${apiUri}/clubs`, fetcher, {
+    onError: (error) => {
+      toast({
+        title: error.message,
+        variant: 'destructive'
+      });
+    }
+  });
+
   const navigate = useNavigate();
   const fileRef = form.register('badge');
 
@@ -33,17 +43,8 @@ export default function ClubForm() {
     saveData.append('badge', values.badge ? values.badge[0] : '');
     saveData.append('payment', values.payment ? 'true' : 'false');
 
-    try {
-      await axios.post(`${apiUri}/clubs`, saveData, {
-        headers: {
-          'Content-Type': 'multipart/form-data'
-        }
-      });
-
-      navigate(-1);
-    } catch (error) {
-      console.log(error);
-    }
+    await trigger(saveData);
+    navigate(-1);
   }
   const handleCancel = () => navigate(-1);
 
@@ -95,13 +96,16 @@ export default function ClubForm() {
           )}
         />
 
-        <Button type='submit' className='me-2'>
-          Guardar
+        <Button type='submit' className='me-2' disabled={isMutating}>
+          {isMutating ? 'Guardando...' : 'Guardar'}
         </Button>
-        <Button type='button' variant='destructive' onClick={handleCancel}>
-          Cancelar
-        </Button>
+        {isMutating || (
+          <Button type='button' variant='destructive' onClick={handleCancel}>
+            Cancelar
+          </Button>
+        )}
       </form>
+      <Toaster />
     </Form>
   );
 }
