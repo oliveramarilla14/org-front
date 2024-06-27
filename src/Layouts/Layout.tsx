@@ -3,6 +3,7 @@ import { ReactNode } from 'react';
 import Loading from './Loading';
 import CreateButtonLink from '@/components/buttons/CreateButtonLink';
 import { HeadTitle } from '@/components/fonts/headers';
+import { Toaster } from '@/components/ui/toaster';
 
 type Props = {
   children: ReactNode;
@@ -24,6 +25,7 @@ export default function Layout({ children, isLoading = false, title, create }: P
 
         {isLoading ? <Loading /> : children}
       </div>
+      <Toaster />
     </>
   );
 }

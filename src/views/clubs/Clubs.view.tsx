@@ -1,22 +1,14 @@
 import Layout from '@/Layouts/Layout';
 import CreateButtonLink from '@/components/buttons/CreateButtonLink';
-import { errorToast } from '@/components/toast/errorToast';
-import { Toaster } from '@/components/ui/toaster';
-import { useToast } from '@/components/ui/use-toast';
 import ClubItem from '@/components/views/clubs/ClubItem';
 import { apiUri } from '@/config/config';
 import { Club } from '@/types/clubs';
 import { CustomAxiosError } from '@/types/error';
-import { useEffect } from 'react';
 import useSWR from 'swr';
 
 export default function Clubs() {
-  const { isLoading, error, data } = useSWR<Club[], CustomAxiosError>(`${apiUri}/clubs`);
-  const { toast } = useToast();
+  const { isLoading, data } = useSWR<Club[], CustomAxiosError>(`${apiUri}/clubs`);
 
-  useEffect(() => {
-    if (error) errorToast(toast, error);
-  }, [toast, error]);
   return (
     <Layout isLoading={isLoading} title='Equipos' create>
       {data && (
@@ -32,8 +24,6 @@ export default function Clubs() {
           <CreateButtonLink className='text-xl ' />
         </div>
       )}
-
-      <Toaster />
     </Layout>
   );
 }

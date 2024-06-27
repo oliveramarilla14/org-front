@@ -37,7 +37,7 @@ describe('Club show', () => {
     server.use(ClubError);
     testRender(<ClubShow />);
 
-    await screen.findByText(/error indefinido/i);
+    await screen.findByText('500 - Error Indefinido');
   });
 
   it('handle undefined data', async () => {

@@ -7,24 +7,39 @@ import NotFound from './Layouts/NotFound';
 import ClubShow from './views/clubs/club.show';
 import Test from './components/test';
 import ClubCreate from './views/clubs/club.create';
+import PlayerCreate from './views/players/player.create';
+import { SWRConfig } from 'swr';
+import { useToast } from './components/ui/use-toast';
+import { CustomAxiosError } from './types/error';
+import { errorToast } from './components/toast/errorToast';
 
 function App() {
+  const { toast } = useToast();
+
   return (
     <>
-      <ThemeProvider defaultTheme='dark'>
-        <Routes>
-          <Route path='/' element={<Index />} />
-          <Route path='/positions' element={<Positions />} />
+      <SWRConfig
+        value={{
+          onError: (error: CustomAxiosError) => errorToast(toast, error)
+        }}
+      >
+        <ThemeProvider defaultTheme='dark'>
+          <Routes>
+            <Route path='/' element={<Index />} />
+            <Route path='/positions' element={<Positions />} />
 
-          {/* clubes */}
-          <Route path='/clubs' element={<Clubs />} />
-          <Route path='/clubs/crear' element={<ClubCreate />} />
-          <Route path='/clubs/:id' element={<ClubShow />} />
+            {/* clubes */}
+            <Route path='/clubs' element={<Clubs />} />
+            <Route path='/clubs/crear' element={<ClubCreate />} />
+            <Route path='/clubs/:id' element={<ClubShow />} />
 
-          <Route path='/test' element={<Test />} />
-          <Route path='*' element={<NotFound />} />
-        </Routes>
-      </ThemeProvider>
+            {/* Jugadores*/}
+            <Route path='/players/add' element={<PlayerCreate />} />
+            <Route path='/test' element={<Test />} />
+            <Route path='*' element={<NotFound />} />
+          </Routes>
+        </ThemeProvider>
+      </SWRConfig>
     </>
   );
 }

@@ -1,6 +1,7 @@
 import { handleFetchError } from '@/helpers/errorHandler';
 import { Club } from '@/types/clubs';
-import axios from 'axios';
+import { Player, PlayerWithoutId } from '@/types/players';
+import axios, { AxiosResponse } from 'axios';
 
 export async function createClubFetcher(url: string, { arg }: { arg: FormData }) {
   try {
@@ -11,6 +12,15 @@ export async function createClubFetcher(url: string, { arg }: { arg: FormData })
     });
 
     return data;
+  } catch (error) {
+    handleFetchError(error);
+  }
+}
+
+export async function createPlayersFetcher(url: string, { arg }: { arg: PlayerWithoutId[] }) {
+  try {
+    const response: AxiosResponse<Player[]> = await axios.post<Player[]>(url, arg);
+    return response.data;
   } catch (error) {
     handleFetchError(error);
   }

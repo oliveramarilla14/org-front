@@ -5,32 +5,28 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Button } from '@/components/ui/button';
-import { apiUri } from '@/config/config';
 import { useNavigate } from 'react-router-dom';
-import { clubFormSchema } from '@/types/clubs';
-import useSWRMutation from 'swr/mutation';
-import { createClubFetcher as fetcher } from '@/api/create';
-import { useToast } from '@/components/ui/use-toast';
-import { Toaster } from '@/components/ui/toaster';
+import { Club, clubFormSchema } from '@/types/clubs';
+import { TriggerWithArgs } from 'swr/mutation';
+import { CustomAxiosError } from '@/types/error';
+import { ReactNode } from 'react';
 
 type FormType = z.infer<typeof clubFormSchema>;
 
-export default function ClubForm() {
+type Props = {
+  club?: Club;
+  trigger: TriggerWithArgs<Club, CustomAxiosError, string, FormData>;
+  isMutating: boolean;
+  children?: ReactNode;
+  onSave: () => void;
+};
+
+export default function ClubForm({ club, trigger, isMutating, children, onSave }: Props) {
   const form = useForm<FormType>({
     resolver: zodResolver(clubFormSchema),
     defaultValues: {
-      name: '',
-      payment: false
-    }
-  });
-  const { toast } = useToast();
-
-  const { trigger, isMutating } = useSWRMutation(`${apiUri}/clubs`, fetcher, {
-    onError: (error) => {
-      toast({
-        title: error.message,
-        variant: 'destructive'
-      });
+      name: club?.name || '',
+      payment: club?.inscriptionPayment || false
     }
   });
 
@@ -44,7 +40,7 @@ export default function ClubForm() {
     saveData.append('payment', values.payment ? 'true' : 'false');
 
     await trigger(saveData);
-    navigate(-1);
+    onSave();
   }
   const handleCancel = () => navigate(-1);
 
@@ -96,16 +92,19 @@ export default function ClubForm() {
           )}
         />
 
-        <Button type='submit' className='me-2' disabled={isMutating}>
-          {isMutating ? 'Guardando...' : 'Guardar'}
-        </Button>
-        {isMutating || (
-          <Button type='button' variant='destructive' onClick={handleCancel}>
-            Cancelar
-          </Button>
+        {children || (
+          <>
+            <Button type='submit' className='me-2' disabled={isMutating}>
+              {isMutating ? 'Guardando...' : 'Guardar'}
+            </Button>
+            {isMutating || (
+              <Button type='button' variant='destructive' onClick={handleCancel}>
+                Cancelar
+              </Button>
+            )}
+          </>
         )}
       </form>
-      <Toaster />
     </Form>
   );
 }

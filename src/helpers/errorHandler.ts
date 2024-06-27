@@ -1,7 +1,7 @@
 import { CustomAxiosError } from '@/types/error';
 import axios from 'axios';
 
-export function handleFetchError(error: unknown) {
+export function handleFetchError(error: unknown): never {
   if (axios.isAxiosError(error)) {
     const customError: CustomAxiosError = {
       statusCode: error.response?.status || 500,
