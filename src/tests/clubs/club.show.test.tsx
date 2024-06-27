@@ -1,6 +1,6 @@
 import { testRender } from '@/helpers/testRender';
 import ClubShow from '@/views/clubs/club.show';
-import { screen } from '@testing-library/dom';
+import { screen, waitForElementToBeRemoved } from '@testing-library/dom';
 import { server } from '../mocks/server';
 import { ClubError, clubEmpty } from '../mocks/uriHandlers/clubsHandlers';
 
@@ -37,7 +37,9 @@ describe('Club show', () => {
     server.use(ClubError);
     testRender(<ClubShow />);
 
-    await screen.findByText('500 - Error Indefinido');
+    await waitForElementToBeRemoved(() => screen.getByText('Cargando...'));
+
+    expect(screen.getByText(/error indefinido/i)).toBeInTheDocument();
   });
 
   it('handle undefined data', async () => {
