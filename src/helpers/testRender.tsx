@@ -3,10 +3,10 @@ import { render } from '@testing-library/react';
 import { SWRConfig } from 'swr';
 import { TestApp } from './testApp';
 
-export function testRender(component: JSX.Element) {
+export function testRender(component: JSX.Element, route?: string) {
   return render(
     <SWRConfig value={{ provider: () => new Map(), fetcher }}>
-      <TestApp>{component}</TestApp>
+      <TestApp route={route}>{component}</TestApp>
     </SWRConfig>
   );
 }

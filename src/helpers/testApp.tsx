@@ -5,8 +5,9 @@ import { ReactNode } from 'react';
 import { MemoryRouter } from 'react-router-dom';
 import { SWRConfig } from 'swr';
 
-export function TestApp({ children }: { children: ReactNode }) {
+export function TestApp({ children, route }: { children: ReactNode; route?: string }) {
   const { toast } = useToast();
+  const routerProps = route ? { initialEntries: [route] } : {};
 
   return (
     <SWRConfig
@@ -14,7 +15,7 @@ export function TestApp({ children }: { children: ReactNode }) {
         onError: (error: CustomAxiosError) => errorToast(toast, error)
       }}
     >
-      <MemoryRouter>{children}</MemoryRouter>
+      <MemoryRouter {...routerProps}>{children}</MemoryRouter>
     </SWRConfig>
   );
 }

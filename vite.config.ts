@@ -1,8 +1,9 @@
 /// <reference types="vitest" />
 /// <reference types="vite/client" />
 
-import path from 'path';
+import { resolve } from 'path';
 import { defineConfig } from 'vite';
+import { coverageConfigDefaults } from 'vitest/config';
 import react from '@vitejs/plugin-react-swc';
 
 // https://vitejs.dev/config/
@@ -11,11 +12,21 @@ export default defineConfig({
   test: {
     environment: 'jsdom',
     globals: true,
-    setupFiles: './src/tests/setup.ts'
+    setupFiles: './src/tests/setup.ts',
+    coverage: {
+      reporter: ['html'], //
+      exclude: [
+        '**/src/components/ui/**',
+        '**/postcss.config.js',
+        '**/tailwind.config.js',
+        '**/src/main.tsx',
+        ...coverageConfigDefaults.exclude
+      ]
+    }
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './src')
+      '@': resolve(__dirname, './src')
     }
   }
 });

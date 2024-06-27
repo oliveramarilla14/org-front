@@ -1,16 +1,19 @@
-import { ModeToggle } from '@/theme/toggle-theme';
-import { render, screen } from '@testing-library/react';
+import App from '@/App';
+import { testRender } from '@/helpers/testRender';
+import { cleanup, screen } from '@testing-library/react';
 
-describe('Theme', () => {
+describe('App', () => {
   beforeEach(() => {
-    render(<ModeToggle />);
+    testRender(<App />);
   });
 
   it('Render correctly', () => {
-    expect(screen.getByTestId('theme-dropdown-button')).toBeDefined();
+    expect(screen.getByText(/Fast Tournament/i)).toBeInTheDocument();
   });
 
-  it('Does not show dropdown at start', () => {
-    expect(screen.queryByTestId('theme-system')).toBeNull();
+  it('renders NotFound component on unknown route', () => {
+    cleanup();
+    testRender(<App />, '/no-existe');
+    expect(screen.getByText(/Pagina no encontrada/i)).toBeInTheDocument();
   });
 });
