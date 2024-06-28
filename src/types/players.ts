@@ -1,5 +1,6 @@
 import { z } from 'zod';
 import { Payment } from './payments';
+import { Club } from './clubs';
 
 export interface Player {
   id: number;
@@ -23,6 +24,16 @@ export interface PlayerStats {
   conceed: number;
   yellows: number;
   reds: number;
+}
+
+export interface PlayerStatsWithData extends PlayerStats {
+  Player: {
+    name: Player['name'];
+    Club: {
+      name: Club['name'];
+      id: Club['id'];
+    } | null;
+  };
 }
 
 export interface PlayerStatsPayments extends Player {

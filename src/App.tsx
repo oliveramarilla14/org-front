@@ -12,6 +12,7 @@ import { SWRConfig } from 'swr';
 import { useToast } from './components/ui/use-toast';
 import { CustomAxiosError } from './types/error';
 import { errorToast } from './components/toast/errorToast';
+import StatsView from './views/stats/stats.view';
 
 function App() {
   const { toast } = useToast();
@@ -35,6 +36,10 @@ function App() {
 
             {/* Jugadores*/}
             <Route path='/players/add' element={<PlayerCreate />} />
+
+            {/* Estadísticas */}
+            <Route path='/stats' element={<StatsView />} />
+
             <Route path='/test' element={<Test />} />
             <Route path='*' element={<NotFound />} />
           </Routes>

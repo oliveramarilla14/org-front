@@ -17,6 +17,7 @@ export default function Index() {
           <PositionTable teams={teams} reduced />
         </Bento>
         <Bento title='Equipos' className='md:col-span-4' link='/clubs' />
+        <Bento title='Estadísticas' className='md:col-span-4' link='/stats' />
       </div>
     </Layout>
   );
