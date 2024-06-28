@@ -25,7 +25,7 @@ export default function StatsTable({ stats, renderCells, columns, sortBy }: Prop
       <TableHeader>
         <TableRow className='text-lg'>
           {columns.map((column) => (
-            <TableHead>{column}</TableHead>
+            <TableHead key={column}>{column}</TableHead>
           ))}
         </TableRow>
       </TableHeader>
