@@ -9,10 +9,10 @@ import {
   DropdownMenuTrigger
 } from '@/components/ui/dropdown-menu';
 import { apiUri } from '@/config/config';
-import { mutate } from 'swr';
 import { handleCancelPayCuota, handlePayCuota } from '@/api/pay';
 import { Cuota } from '@/types/payments';
 import { DropdownMenuSeparator } from '@radix-ui/react-dropdown-menu';
+import useSWRMutation from 'swr/mutation';
 
 type Props = {
   cuota: Cuota;
@@ -20,6 +20,9 @@ type Props = {
 };
 
 export default function TableMenuDropdown({ cuota, variant }: Props) {
+  const { trigger: triggerCancel } = useSWRMutation(`${apiUri}/payments/cuotas`, handleCancelPayCuota);
+  const { trigger: triggerPay } = useSWRMutation(`${apiUri}/payments/cuotas`, handlePayCuota);
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -31,20 +34,14 @@ export default function TableMenuDropdown({ cuota, variant }: Props) {
       <DropdownMenuContent align='end'>
         <DropdownMenuLabel>Acciones</DropdownMenuLabel>
         {variant === 'cancel' && (
-          <DropdownMenuItem
-            onClick={() => mutate(`${apiUri}/payments/cuotas`, handleCancelPayCuota(cuota.id))}
-            className='cursor-pointer'
-          >
+          <DropdownMenuItem onClick={() => triggerCancel(cuota.id)} className='cursor-pointer'>
             <CircleDollarSign className='me-1' /> Cancelar pago
           </DropdownMenuItem>
         )}
 
         {variant === 'confirm' && (
           <>
-            <DropdownMenuItem
-              onClick={() => mutate(`${apiUri}/payments/cuotas`, handlePayCuota(cuota.id))}
-              className='cursor-pointer'
-            >
+            <DropdownMenuItem onClick={() => triggerPay(cuota.id)} className='cursor-pointer'>
               <CircleDollarSign className='me-1' /> Pagar
             </DropdownMenuItem>
             <DropdownMenuSeparator />

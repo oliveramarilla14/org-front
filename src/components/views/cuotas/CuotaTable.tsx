@@ -15,7 +15,7 @@ export default function CuotaTable<TData, TValue>({ data, columns }: Props<TData
   });
 
   return (
-    <div className='rounded-md border'>
+    <div className='rounded-md border mt-5'>
       <Table>
         <TableHeader>
           {table.getHeaderGroups().map((headerGroup) => (
