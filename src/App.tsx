@@ -13,6 +13,7 @@ import { useToast } from './components/ui/use-toast';
 import { CustomAxiosError } from './types/error';
 import { errorToast } from './components/toast/errorToast';
 import StatsView from './views/stats/stats.view';
+import CuotasView from './views/Cuotas/cuotas.view';
 
 function App() {
   const { toast } = useToast();
@@ -39,6 +40,7 @@ function App() {
 
             {/* Estadísticas */}
             <Route path='/stats' element={<StatsView />} />
+            <Route path='/cuotas' element={<CuotasView />} />
 
             <Route path='/test' element={<Test />} />
             <Route path='*' element={<NotFound />} />

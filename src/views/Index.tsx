@@ -18,6 +18,7 @@ export default function Index() {
         </Bento>
         <Bento title='Equipos' className='md:col-span-4' link='/clubs' />
         <Bento title='Estadísticas' className='md:col-span-4' link='/stats' />
+        <Bento title='Cuotas' className='md:col-span-4' link='/cuotas' />
       </div>
     </Layout>
   );
