@@ -20,7 +20,6 @@ export default function Bento({ title, children, className, link }: Props) {
         <Button asChild size='sm' className='ml-auto gap-1'>
           <Link to={link} className='bg-transparent hover:bg-transparent'>
             <Button>
-              Ver todo
               <ArrowUpRight className='h-4 w-4' />
             </Button>
           </Link>

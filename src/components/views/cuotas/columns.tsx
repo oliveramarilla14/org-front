@@ -1,18 +1,20 @@
 import { Cuota } from '@/types/payments';
 import { ColumnDef } from '@tanstack/react-table';
 import TableMenuDropdown from './TableMenuDropdown';
+import { sortableHeader } from '@/helpers/tableHelpers';
 
 export const cuotaColumns: ColumnDef<Cuota>[] = [
   {
-    header: 'Nombre',
-    accessorKey: 'Player.name'
+    header: sortableHeader<Cuota>('Nombre'),
+    accessorKey: 'Player.name',
+    filterFn: 'arrIncludes'
   },
   {
-    header: 'Equipo',
+    header: sortableHeader<Cuota>('Equipo'),
     accessorKey: 'Club.name'
   },
   {
-    header: 'Status',
+    header: sortableHeader<Cuota>('Estado'),
     accessorKey: 'paid',
     cell: ({ row }) => {
       const cuota = row.original;
@@ -21,13 +23,17 @@ export const cuotaColumns: ColumnDef<Cuota>[] = [
         const deadline = new Date(cuota.deadline);
         return today > deadline ? 'Vencido' : 'Pendiente';
       } else {
-        return 'pagado';
+        return 'Pagado';
       }
+    },
+    meta: {
+      filterVariant: 'select'
     }
   },
 
   {
-    header: 'Vencimiento',
+    header: sortableHeader<Cuota>('Vencimiento'),
+
     accessorKey: 'deadline',
     cell: ({ row }) => {
       const date = new Date(row.getValue('deadline'));

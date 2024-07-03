@@ -2,7 +2,8 @@
 
 ## Main issues
 
-- revisar coverage y agregar tests necesarios
+- agregar filtro individual para tabla Cuota
+- test cuota view
 
 ## backlog
 
