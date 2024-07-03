@@ -1,16 +1,6 @@
 import { Cuota } from '@/types/payments';
 import { ColumnDef } from '@tanstack/react-table';
-import { CircleDollarSign, MoreHorizontal, Trash } from 'lucide-react';
-
-import { Button } from '@/components/ui/button';
-import {
-  DropdownMenu,
-  DropdownMenuContent,
-  DropdownMenuItem,
-  DropdownMenuLabel,
-  DropdownMenuSeparator,
-  DropdownMenuTrigger
-} from '@/components/ui/dropdown-menu';
+import TableMenuDropdown from './TableMenuDropdown';
 
 export const cuotaColumns: ColumnDef<Cuota>[] = [
   {
@@ -22,8 +12,18 @@ export const cuotaColumns: ColumnDef<Cuota>[] = [
     accessorKey: 'Club.name'
   },
   {
-    header: 'Pagado',
-    accessorKey: 'paid'
+    header: 'Status',
+    accessorKey: 'paid',
+    cell: ({ row }) => {
+      const cuota = row.original;
+      if (!cuota.paid) {
+        const today = new Date();
+        const deadline = new Date(cuota.deadline);
+        return today > deadline ? 'Vencido' : 'Pendiente';
+      } else {
+        return 'pagado';
+      }
+    }
   },
 
   {
@@ -41,31 +41,11 @@ export const cuotaColumns: ColumnDef<Cuota>[] = [
     cell: ({ row }) => {
       const cuota = row.original;
 
-      return (
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <Button variant='ghost' className='h-8 w-8 p-0'>
-              <span className='sr-only'>Abrir menu</span>
-              <MoreHorizontal className='h-4 w-4' />
-            </Button>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent align='end'>
-            <DropdownMenuLabel>Acciones</DropdownMenuLabel>
-            <DropdownMenuItem onClick={() => handlePayCuota(cuota.id)}>
-              <CircleDollarSign className='me-1' /> Pagar
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DropdownMenuItem>
-              <Trash className='me-1' />
-              Eliminar
-            </DropdownMenuItem>
-          </DropdownMenuContent>
-        </DropdownMenu>
-      );
+      if (cuota.paid) {
+        return <TableMenuDropdown cuota={cuota} variant='cancel' />;
+      } else {
+        return <TableMenuDropdown cuota={cuota} variant='confirm' />;
+      }
     }
   }
 ];
-
-const handlePayCuota = (id: Cuota['id']) => {
-  console.log(id);
-};
