@@ -1,3 +1,6 @@
+import { Club } from './clubs';
+import { Player } from './players';
+
 export interface Payment {
   id: number;
   clubId: number;
@@ -7,4 +10,9 @@ export interface Payment {
   deadline: string;
   paid: boolean;
   paydate: string | null;
+}
+
+export interface Cuota extends Payment {
+  Club: Club;
+  Player: Player;
 }
