@@ -1,6 +1,7 @@
 import { Button } from '@/components/ui/button';
-import { Column } from '@tanstack/react-table';
+import { Column, Row } from '@tanstack/react-table';
 import { ArrowUpDown } from 'lucide-react';
+import { DateRange } from 'react-day-picker';
 
 export function sortableHeader<T>(text: string) {
   return ({ column }: { column: Column<T> }) => {
@@ -14,3 +15,11 @@ export function sortableHeader<T>(text: string) {
     );
   };
 }
+
+export const filterByDateRange = (row: Row<unknown>, id: string, filterValue: DateRange | null) => {
+  const deadline = new Date(row.getValue(id));
+  if (!filterValue || !filterValue.from || !filterValue.to) {
+    return true;
+  }
+  return deadline >= filterValue.from && deadline <= filterValue.to;
+};

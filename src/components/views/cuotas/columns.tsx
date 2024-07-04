@@ -14,7 +14,6 @@ export const cuotaColumns: ColumnDef<Cuota>[] = [
   },
   {
     header: sortableHeader<Cuota>('Estado'),
-    // accessorKey: 'paid',
     id: 'paid',
     accessorFn: (row) => {
       if (!row.paid) {
@@ -41,9 +40,11 @@ export const cuotaColumns: ColumnDef<Cuota>[] = [
 
       return formatted;
     },
+
     meta: {
       filterVariant: 'range'
-    }
+    },
+    filterFn: 'deadline'
   },
   {
     id: 'actions',

@@ -14,6 +14,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
 import FilterInput from '@/components/table/FilterInput';
+import { filterByDateRange } from '@/helpers/tableHelpers';
 
 interface Props<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -33,6 +34,9 @@ export default function CuotaTable<TData, TValue>({ data, columns }: Props<TData
     getSortedRowModel: getSortedRowModel(),
     getFilteredRowModel: getFilteredRowModel(),
     getFacetedUniqueValues: getFacetedUniqueValues(),
+    filterFns: {
+      deadline: filterByDateRange
+    },
     onColumnFiltersChange: setColumnFilters,
     state: {
       sorting,
@@ -51,7 +55,9 @@ export default function CuotaTable<TData, TValue>({ data, columns }: Props<TData
                   return (
                     <TableHead key={header.id}>
                       {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
-                      {header.column.getCanFilter() && <FilterInput column={header.column} />}
+                      <div className='mb-5'>
+                        {header.column.getCanFilter() && <FilterInput column={header.column} />}
+                      </div>
                     </TableHead>
                   );
                 })}
