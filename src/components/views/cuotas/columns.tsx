@@ -6,11 +6,13 @@ import { sortableHeader } from '@/helpers/tableHelpers';
 export const cuotaColumns: ColumnDef<Cuota>[] = [
   {
     header: sortableHeader<Cuota>('Nombre'),
-    accessorKey: 'Player.name'
+    accessorKey: 'Player.name',
+    accessorFn: (row) => row.Player?.name || 'Eliminado!'
   },
   {
     header: sortableHeader<Cuota>('Equipo'),
-    accessorKey: 'Club.name'
+    accessorKey: 'Club.name',
+    accessorFn: (row) => row.Club?.name || 'Sin Equipo'
   },
   {
     header: sortableHeader<Cuota>('Estado'),

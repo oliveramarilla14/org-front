@@ -3,8 +3,8 @@ import { Player } from './players';
 
 export interface Payment {
   id: number;
-  clubId: number;
-  playerId?: number;
+  clubId: number | null;
+  playerId: number | null;
   type: string;
   price: number;
   deadline: string;
@@ -13,6 +13,6 @@ export interface Payment {
 }
 
 export interface Cuota extends Payment {
-  Club: Club;
-  Player: Player;
+  Club?: Club | null;
+  Player?: Player | null;
 }

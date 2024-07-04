@@ -78,7 +78,7 @@ export default function CuotaTable<TData, TValue>({ data, columns }: Props<TData
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className='h-24 text-center'>
-                  No existen registro de cuotas.
+                  No existen registros de cuotas.
                 </TableCell>
               </TableRow>
             )}

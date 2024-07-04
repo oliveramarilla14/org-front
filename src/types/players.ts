@@ -5,7 +5,7 @@ import { Club } from './clubs';
 export interface Player {
   id: number;
   name: string;
-  teamId: number;
+  teamId?: number | null;
   documentNumber: number;
   promYear: number;
   phoneNumber: number | null;
