@@ -6,8 +6,7 @@ import { sortableHeader } from '@/helpers/tableHelpers';
 export const cuotaColumns: ColumnDef<Cuota>[] = [
   {
     header: sortableHeader<Cuota>('Nombre'),
-    accessorKey: 'Player.name',
-    filterFn: 'arrIncludes'
+    accessorKey: 'Player.name'
   },
   {
     header: sortableHeader<Cuota>('Equipo'),
@@ -15,17 +14,18 @@ export const cuotaColumns: ColumnDef<Cuota>[] = [
   },
   {
     header: sortableHeader<Cuota>('Estado'),
-    accessorKey: 'paid',
-    cell: ({ row }) => {
-      const cuota = row.original;
-      if (!cuota.paid) {
+    // accessorKey: 'paid',
+    id: 'paid',
+    accessorFn: (row) => {
+      if (!row.paid) {
         const today = new Date();
-        const deadline = new Date(cuota.deadline);
+        const deadline = new Date(row.deadline);
         return today > deadline ? 'Vencido' : 'Pendiente';
       } else {
         return 'Pagado';
       }
     },
+
     meta: {
       filterVariant: 'select'
     }
@@ -40,6 +40,9 @@ export const cuotaColumns: ColumnDef<Cuota>[] = [
       const formatted = date.toLocaleDateString();
 
       return formatted;
+    },
+    meta: {
+      filterVariant: 'range'
     }
   },
   {
@@ -52,6 +55,7 @@ export const cuotaColumns: ColumnDef<Cuota>[] = [
       } else {
         return <TableMenuDropdown cuota={cuota} variant='confirm' />;
       }
-    }
+    },
+    enableColumnFilter: false
   }
 ];

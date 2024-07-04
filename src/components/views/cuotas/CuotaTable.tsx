@@ -1,17 +1,19 @@
 import {
   ColumnDef,
+  ColumnFiltersState,
   SortingState,
   flexRender,
   getCoreRowModel,
+  getFacetedUniqueValues,
   getFilteredRowModel,
   getPaginationRowModel,
   getSortedRowModel,
   useReactTable
 } from '@tanstack/react-table';
-
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Button } from '@/components/ui/button';
 import { useState } from 'react';
+import FilterInput from '@/components/table/FilterInput';
 
 interface Props<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
@@ -20,6 +22,7 @@ interface Props<TData, TValue> {
 
 export default function CuotaTable<TData, TValue>({ data, columns }: Props<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
+  const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const table = useReactTable({
     data,
@@ -28,10 +31,12 @@ export default function CuotaTable<TData, TValue>({ data, columns }: Props<TData
     getPaginationRowModel: getPaginationRowModel(),
     onSortingChange: setSorting,
     getSortedRowModel: getSortedRowModel(),
-
     getFilteredRowModel: getFilteredRowModel(),
+    getFacetedUniqueValues: getFacetedUniqueValues(),
+    onColumnFiltersChange: setColumnFilters,
     state: {
-      sorting
+      sorting,
+      columnFilters
     }
   });
 
@@ -46,6 +51,7 @@ export default function CuotaTable<TData, TValue>({ data, columns }: Props<TData
                   return (
                     <TableHead key={header.id}>
                       {header.isPlaceholder ? null : flexRender(header.column.columnDef.header, header.getContext())}
+                      {header.column.getCanFilter() && <FilterInput column={header.column} />}
                     </TableHead>
                   );
                 })}
@@ -66,7 +72,7 @@ export default function CuotaTable<TData, TValue>({ data, columns }: Props<TData
             ) : (
               <TableRow>
                 <TableCell colSpan={columns.length} className='h-24 text-center'>
-                  No hay cuotas.
+                  No existen registro de cuotas.
                 </TableCell>
               </TableRow>
             )}
@@ -75,10 +81,10 @@ export default function CuotaTable<TData, TValue>({ data, columns }: Props<TData
       </div>
       <div className='flex items-center justify-end space-x-2 py-4'>
         <Button variant='outline' size='sm' onClick={() => table.previousPage()} disabled={!table.getCanPreviousPage()}>
-          Previous
+          Anterior
         </Button>
         <Button variant='outline' size='sm' onClick={() => table.nextPage()} disabled={!table.getCanNextPage()}>
-          Next
+          Siguiente
         </Button>
       </div>
     </>
