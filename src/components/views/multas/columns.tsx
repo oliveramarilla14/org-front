@@ -1,21 +1,26 @@
-import { Cuota } from '@/types/payments';
+import { Multa } from '@/types/payments';
 import { ColumnDef } from '@tanstack/react-table';
-import TableCuotaDropdown from './TableMenuDropdown';
 import { sortableHeader } from '@/helpers/tableHelpers';
+import TableCuotaDropdown from '../cuotas/TableMenuDropdown';
 
-export const cuotaColumns: ColumnDef<Cuota>[] = [
+export const multaColumns: ColumnDef<Multa>[] = [
   {
-    header: sortableHeader<Cuota>('Nombre'),
+    header: sortableHeader<Multa>('Nombre'),
     accessorKey: 'Player.name',
     accessorFn: (row) => row.Player?.name || 'Eliminado!'
   },
   {
-    header: sortableHeader<Cuota>('Equipo'),
+    header: sortableHeader<Multa>('Equipo'),
     accessorKey: 'Club.name',
     accessorFn: (row) => row.Club?.name || 'Sin Equipo'
   },
   {
-    header: sortableHeader<Cuota>('Estado'),
+    header: sortableHeader<Multa>('Tipo'),
+    accessorKey: 'type'
+  },
+
+  {
+    header: sortableHeader<Multa>('Estado'),
     id: 'paid',
     accessorFn: (row) => {
       if (!row.paid) {
@@ -33,7 +38,7 @@ export const cuotaColumns: ColumnDef<Cuota>[] = [
   },
 
   {
-    header: sortableHeader<Cuota>('Vencimiento'),
+    header: sortableHeader<Multa>('Vencimiento'),
 
     accessorKey: 'deadline',
     cell: ({ row }) => {
@@ -47,6 +52,10 @@ export const cuotaColumns: ColumnDef<Cuota>[] = [
       filterVariant: 'range'
     },
     filterFn: 'deadline'
+  },
+  {
+    header: 'Obs',
+    accessorKey: 'observation'
   },
   {
     id: 'actions',

@@ -10,9 +10,15 @@ export interface Payment {
   deadline: string;
   paid: boolean;
   paydate: string | null;
+  observation?: string | null;
 }
 
 export interface Cuota extends Payment {
+  Club?: Club | null;
+  Player?: Player | null;
+}
+
+export interface Multa extends Payment {
   Club?: Club | null;
   Player?: Player | null;
 }

@@ -1,5 +1,5 @@
 import Layout from '@/Layouts/Layout';
-import CuotaTable from '@/components/views/cuotas/CuotaTable';
+import PaymentsTable from '@/components/table/PaymentsTable';
 import { cuotaColumns } from '@/components/views/cuotas/columns';
 import { apiUri } from '@/config/config';
 import { Cuota } from '@/types/payments';
@@ -10,7 +10,7 @@ export default function CuotasView() {
 
   return (
     <Layout title='Cuotas' isLoading={isLoading}>
-      <CuotaTable data={cuotas ?? []} columns={cuotaColumns} />
+      <PaymentsTable data={cuotas ?? []} columns={cuotaColumns} empty='No existen registros de cuotas.' />
     </Layout>
   );
 }

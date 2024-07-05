@@ -33,7 +33,7 @@ type Props = {
   variant: 'confirm' | 'cancel';
 };
 
-export default function TableMenuDropdown({ cuota, variant }: Props) {
+export default function TableCuotaDropdown({ cuota, variant }: Props) {
   const { trigger: triggerCancel } = useSWRMutation(`${apiUri}/payments/cuotas`, handleCancelPayCuota);
   const { trigger: triggerPay } = useSWRMutation(`${apiUri}/payments/cuotas`, handlePayCuota);
   const { trigger: triggerDelete } = useSWRMutation(`${apiUri}/payments/multas`, deleteCuotaFetcher);

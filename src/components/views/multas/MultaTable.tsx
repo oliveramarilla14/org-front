@@ -21,7 +21,7 @@ interface Props<TData, TValue> {
   data: TData[];
 }
 
-export default function CuotaTable<TData, TValue>({ data, columns }: Props<TData, TValue>) {
+export default function MultaTable<TData, TValue>({ data, columns }: Props<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
