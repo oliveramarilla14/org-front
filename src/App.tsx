@@ -14,6 +14,8 @@ import { CustomAxiosError } from './types/error';
 import { errorToast } from './components/toast/errorToast';
 import StatsView from './views/stats/stats.view';
 import CuotasView from './views/Cuotas/cuotas.view';
+import MultasView from './views/multas/multas.view';
+import MultasCreate from './views/multas/multas.create';
 
 function App() {
   const { toast } = useToast();
@@ -41,6 +43,8 @@ function App() {
             {/* Estadísticas */}
             <Route path='/stats' element={<StatsView />} />
             <Route path='/cuotas' element={<CuotasView />} />
+            <Route path='/pagos' element={<MultasView />} />
+            <Route path='/pagos/crear' element={<MultasCreate />} />
 
             <Route path='/test' element={<Test />} />
             <Route path='*' element={<NotFound />} />

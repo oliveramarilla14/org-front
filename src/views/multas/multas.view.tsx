@@ -9,7 +9,7 @@ export default function MultasView() {
   const { data: multas, isLoading } = useSWR<Multa[]>(`${apiUri}/payments/multas`);
 
   return (
-    <Layout title='Multas' isLoading={isLoading}>
+    <Layout title='Pagos' isLoading={isLoading} create>
       <PaymentsTable data={multas ?? []} columns={multaColumns} empty='No existen registros de cuotas.' />
     </Layout>
   );

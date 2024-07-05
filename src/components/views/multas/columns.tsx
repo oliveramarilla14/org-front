@@ -1,13 +1,13 @@
 import { Multa } from '@/types/payments';
 import { ColumnDef } from '@tanstack/react-table';
 import { sortableHeader } from '@/helpers/tableHelpers';
-import TableCuotaDropdown from '../cuotas/TableMenuDropdown';
+import TableMultaDropdown from './TableMultaDropdown';
 
 export const multaColumns: ColumnDef<Multa>[] = [
   {
     header: sortableHeader<Multa>('Nombre'),
     accessorKey: 'Player.name',
-    accessorFn: (row) => row.Player?.name || 'Eliminado!'
+    accessorFn: (row) => row.Player?.name || 'Todo el Equipo'
   },
   {
     header: sortableHeader<Multa>('Equipo'),
@@ -18,7 +18,14 @@ export const multaColumns: ColumnDef<Multa>[] = [
     header: sortableHeader<Multa>('Tipo'),
     accessorKey: 'type'
   },
-
+  {
+    header: sortableHeader<Multa>('Precio'),
+    accessorKey: 'price',
+    accessorFn: (val) => `${Intl.NumberFormat().format(val.price)} Gs`,
+    meta: {
+      filterVariant: 'range'
+    }
+  },
   {
     header: sortableHeader<Multa>('Estado'),
     id: 'paid',
@@ -55,17 +62,18 @@ export const multaColumns: ColumnDef<Multa>[] = [
   },
   {
     header: 'Obs',
-    accessorKey: 'observation'
+    accessorKey: 'observation',
+    enableColumnFilter: false
   },
   {
     id: 'actions',
     cell: ({ row }) => {
-      const cuota = row.original;
+      const multa = row.original;
 
-      if (cuota.paid) {
-        return <TableCuotaDropdown cuota={cuota} variant='cancel' />;
+      if (multa.paid) {
+        return <TableMultaDropdown multa={multa} variant='cancel' />;
       } else {
-        return <TableCuotaDropdown cuota={cuota} variant='confirm' />;
+        return <TableMultaDropdown multa={multa} variant='confirm' />;
       }
     },
     enableColumnFilter: false

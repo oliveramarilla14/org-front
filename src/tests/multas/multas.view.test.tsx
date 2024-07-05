@@ -8,7 +8,7 @@ describe('Multas View', () => {
   });
 
   it('render correctly', () => {
-    expect(screen.getByText('Multas')).toBeInTheDocument();
+    expect(screen.getByText('Pagos')).toBeInTheDocument();
   });
   it('show loading screen', () => {
     expect(screen.getByText('Cargando...')).toBeInTheDocument();
