@@ -1,6 +1,7 @@
 import { handleFetchError } from '@/helpers/errorHandler';
 import { Club } from '@/types/clubs';
-import axios from 'axios';
+import { Multa, MultaForm } from '@/types/payments';
+import axios, { AxiosResponse } from 'axios';
 
 export async function editClubFetcher(url: string, { arg }: { arg: FormData }) {
   try {
@@ -11,6 +12,15 @@ export async function editClubFetcher(url: string, { arg }: { arg: FormData }) {
     });
 
     return data;
+  } catch (error) {
+    handleFetchError(error);
+  }
+}
+
+export async function editMultasFetcher(url: string, { arg }: { arg: MultaForm }) {
+  try {
+    const response: AxiosResponse<Multa> = await axios.put<Multa>(url, arg);
+    return response.data;
   } catch (error) {
     handleFetchError(error);
   }

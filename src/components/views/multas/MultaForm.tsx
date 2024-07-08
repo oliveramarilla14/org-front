@@ -32,11 +32,11 @@ export default function MultaForm({ multa, isMutating, children, onSave, clubs, 
     resolver: zodResolver(multaFormSchema),
     defaultValues: {
       clubId: multa?.Club?.id.toString() || '',
-      playerId: multa?.Player?.id.toString() || '',
+      playerId: multa?.Club?.id ? multa?.Player?.id.toString() || 'all' : multa?.Player?.id.toString() || '',
       type: multa?.type || '',
       price: multa?.price.toString() || '',
       deadline: multa?.deadline ? new Date(multa?.deadline) : undefined,
-      observation: multa?.deadline || ''
+      observation: multa?.observation || ''
     }
   });
 
@@ -58,7 +58,7 @@ export default function MultaForm({ multa, isMutating, children, onSave, clubs, 
           render={({ field }) => (
             <FormItem>
               <FormLabel>Club</FormLabel>
-              <Select onValueChange={field.onChange} defaultValue={field.value.toString()}>
+              <Select onValueChange={field.onChange} defaultValue={field.value}>
                 <FormControl>
                   <SelectTrigger>
                     <SelectValue placeholder='Elija Un equipo' />

@@ -32,7 +32,6 @@ export async function createMultasFetcher(url: string, { arg }: { arg: MultaForm
     const response: AxiosResponse<Multa> = await axios.post<Multa>(url, arg);
     return response.data;
   } catch (error) {
-    console.log(error);
     handleFetchError(error);
   }
 }

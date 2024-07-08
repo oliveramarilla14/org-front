@@ -1,4 +1,4 @@
-import { CircleDollarSign, MoreHorizontal, Trash } from 'lucide-react';
+import { CircleDollarSign, FilePenLine, MoreHorizontal, Trash } from 'lucide-react';
 import {
   Dialog,
   DialogClose,
@@ -71,7 +71,7 @@ export default function TableMultaDropdown({ multa, variant }: Props) {
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem onClick={() => nav(`./${multa.id}/edit`)} className='cursor-pointer'>
-                  <CircleDollarSign className='me-1' /> Editar
+                  <FilePenLine className='me-1' /> Editar
                 </DropdownMenuItem>
                 <DialogTrigger asChild>
                   <DropdownMenuItem className='cursor-pointer'>
