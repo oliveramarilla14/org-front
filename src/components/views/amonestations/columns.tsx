@@ -2,6 +2,7 @@ import { ColumnDef } from '@tanstack/react-table';
 import { sortableHeader } from '@/helpers/tableHelpers';
 import { Amonestation } from '@/types/amonestations';
 import { Link } from 'react-router-dom';
+import TableAmonestationDropdown from './TableAmonestationDropdown';
 
 export const amonestationsColumns: ColumnDef<Amonestation>[] = [
   {
@@ -68,9 +69,14 @@ export const amonestationsColumns: ColumnDef<Amonestation>[] = [
     header: sortableHeader<Amonestation>('Obs'),
     accessorKey: 'observation',
     enableColumnFilter: false
+  },
+  {
+    id: 'actions',
+    cell: ({ row }) => {
+      const amonestation = row.original;
+
+      return <TableAmonestationDropdown amonestation={amonestation} />;
+    },
+    enableColumnFilter: false
   }
-  // {
-  //   header: sortableHeader<Amonestation>('Creado'),
-  //   accessorKey: 'id'
-  // }
 ];
