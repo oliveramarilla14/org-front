@@ -2,8 +2,8 @@
 
 ## Main issues
 
-- agregar filtro individual para tabla Cuota
-- test cuota view
+- Actions en amonestations table
+- Create en amonestations
 
 ## backlog
 

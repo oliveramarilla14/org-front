@@ -20,6 +20,7 @@ export default function Index() {
         <Bento title='Estadísticas' className='md:col-span-4' link='/stats' />
         <Bento title='Cuotas' className='md:col-span-4' link='/cuotas' />
         <Bento title='Pagos' className='md:col-span-3' link='/pagos' />
+        <Bento title='Amonestaciones' className='md:col-span-3' link='/amonestations' />
       </div>
     </Layout>
   );

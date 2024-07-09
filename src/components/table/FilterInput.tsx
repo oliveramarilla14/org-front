@@ -30,14 +30,18 @@ export default function FilterInput<TData>({ column }: Props<TData>) {
       <DateRangeComponent date={date} setDate={setDate} />
     </div>
   ) : filterVariant === 'select' ? (
-    <Select onValueChange={(val) => column.setFilterValue(val)}>
+    <Select
+      onValueChange={(val) => (val === 'all' ? column.setFilterValue('') : column.setFilterValue(val))}
+      defaultValue='all'
+    >
       <SelectTrigger>
         <SelectValue placeholder='' />
       </SelectTrigger>
       <SelectContent>
+        <SelectItem value='all'>Todo</SelectItem>
         {uniqueValues.map((value) => {
           return (
-            <SelectItem key={value[1]} value={value[0]}>
+            <SelectItem key={value[1] + '_selectFilter' + value[0]} value={value[0]}>
               {value[0]}
             </SelectItem>
           );

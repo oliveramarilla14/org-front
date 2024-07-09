@@ -27,6 +27,6 @@ describe('Stats Table', () => {
     await screen.findByText(multas[0].Player!.name);
     await screen.findByText(multas[0].Club!.name);
     await screen.findByText('Sin Equipo');
-    await screen.findByText('Eliminado!');
+    await screen.findByText('Todo el Equipo');
   });
 });
