@@ -1,4 +1,5 @@
 import { handleFetchError } from '@/helpers/errorHandler';
+import { Amonestation, AmonestationForm } from '@/types/amonestations';
 import { Club } from '@/types/clubs';
 import { Multa, MultaForm } from '@/types/payments';
 import { Player, PlayerWithoutId } from '@/types/players';
@@ -32,6 +33,16 @@ export async function createMultasFetcher(url: string, { arg }: { arg: MultaForm
     const response: AxiosResponse<Multa> = await axios.post<Multa>(url, arg);
     return response.data;
   } catch (error) {
+    handleFetchError(error);
+  }
+}
+
+export async function createAmonestationFetcher(url: string, { arg }: { arg: Omit<AmonestationForm, 'sanction'> }) {
+  try {
+    const response: AxiosResponse<Amonestation> = await axios.post<Amonestation>(url, arg);
+    return response.data;
+  } catch (error) {
+    console.log(error);
     handleFetchError(error);
   }
 }

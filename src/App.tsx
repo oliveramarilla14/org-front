@@ -17,8 +17,9 @@ import CuotasView from './views/Cuotas/cuotas.view';
 import MultasView from './views/multas/multas.view';
 import MultasCreate from './views/multas/multas.create';
 import MultasEdit from './views/multas/multas.edit';
-import AmonestationsView from './views/amonestations/amonestations..view';
+import AmonestationsView from './views/amonestations/amonestations.view';
 import MultaShow from './views/multas/multas.show';
+import AmonestationCreate from './views/amonestations/amonestations.create';
 
 function App() {
   const { toast } = useToast();
@@ -53,6 +54,7 @@ function App() {
             <Route path='/pagos/:id/edit' element={<MultasEdit />} />
 
             <Route path='/amonestations' element={<AmonestationsView />} />
+            <Route path='/amonestations/crear' element={<AmonestationCreate />} />
 
             <Route path='/test' element={<Test />} />
             <Route path='*' element={<NotFound />} />
