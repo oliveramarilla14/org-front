@@ -66,7 +66,7 @@ export const amonestationsColumns: ColumnDef<Amonestation>[] = [
     }
   },
   {
-    header: sortableHeader<Amonestation>('Obs'),
+    header: 'Obs',
     accessorKey: 'observation',
     enableColumnFilter: false
   },

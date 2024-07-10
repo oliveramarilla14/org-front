@@ -25,15 +25,16 @@ export default function AmonestationForm({ amonestation, isMutating, children, o
   const form = useForm<AmonestationFormType>({
     resolver: zodResolver(amonestationFormSchema),
     defaultValues: {
-      clubId: amonestation?.Club?.id.toString() || '',
-      playerId: amonestation?.Club?.id
-        ? amonestation?.Player?.id.toString() || 'all'
-        : amonestation?.Player?.id.toString() || '',
-      pointsDeducted: '',
-      matchesToPay: ''
+      clubId: amonestation?.clubId.toString() || '',
+      playerId: amonestation?.clubId
+        ? amonestation?.playerId?.toString() || 'all'
+        : amonestation?.playerId?.toString() || '',
+      pointsDeducted: amonestation?.pointsDeducted?.toString() || '',
+      matchesToPay: amonestation?.matchesToPay?.toString() || '',
+      type: amonestation?.type || '',
+      sanction: amonestation?.matchesToPay ? 'partidos' : amonestation?.pointsDeducted ? 'puntos' : ''
     }
   });
-
   const navigate = useNavigate();
   const clubId = form.watch('clubId');
   const type = form.watch('sanction');

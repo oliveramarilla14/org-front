@@ -14,7 +14,7 @@ export default function AmonestationCreate() {
   const nav = useNavigate();
 
   return (
-    <Layout title='Crear Pago' isLoading={isLoading}>
+    <Layout title='Crear Amonestación' isLoading={isLoading}>
       <div>
         <AmonestationForm
           clubs={clubs ?? []}

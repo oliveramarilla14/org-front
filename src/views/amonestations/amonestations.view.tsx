@@ -8,7 +8,7 @@ import useSWR from 'swr';
 export default function AmonestationsView() {
   const { data: amonestations, isLoading } = useSWR<Amonestation[]>(`${apiUri}/amonestations`);
   return (
-    <Layout title='Pagos' create isLoading={isLoading}>
+    <Layout title='Amonestaciones' create isLoading={isLoading}>
       <AmonestationTable
         columns={amonestationsColumns}
         data={amonestations ?? []}

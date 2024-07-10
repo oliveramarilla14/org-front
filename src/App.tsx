@@ -20,6 +20,7 @@ import MultasEdit from './views/multas/multas.edit';
 import AmonestationsView from './views/amonestations/amonestations.view';
 import MultaShow from './views/multas/multas.show';
 import AmonestationCreate from './views/amonestations/amonestations.create';
+import AmonestationEdit from './views/amonestations/amonestations.edit';
 
 function App() {
   const { toast } = useToast();
@@ -55,6 +56,7 @@ function App() {
 
             <Route path='/amonestations' element={<AmonestationsView />} />
             <Route path='/amonestations/crear' element={<AmonestationCreate />} />
+            <Route path='/amonestations/:id/edit' element={<AmonestationEdit />} />
 
             <Route path='/test' element={<Test />} />
             <Route path='*' element={<NotFound />} />
