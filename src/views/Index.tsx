@@ -12,7 +12,7 @@ export default function Index() {
   return (
     <Layout isLoading={false} title='Exa Campoverde'>
       <div className='grid md:grid-cols-12 gap-4 mt-4'>
-        <Bento title='Fixture' className='md:col-span-7' link='/' />
+        <Bento title='Fixture' className='md:col-span-7' link='/fixture' />
         <Bento title='Tabla' className='md:col-span-5 ' link='positions'>
           <PositionTable teams={teams} reduced />
         </Bento>
