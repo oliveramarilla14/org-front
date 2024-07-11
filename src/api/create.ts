@@ -42,7 +42,6 @@ export async function createAmonestationFetcher(url: string, { arg }: { arg: Omi
     const response: AxiosResponse<Amonestation> = await axios.post<Amonestation>(url, arg);
     return response.data;
   } catch (error) {
-    console.log(error);
     handleFetchError(error);
   }
 }
