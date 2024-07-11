@@ -2,6 +2,7 @@ import { TableHead, TableRow, TableHeader, TableCell, TableBody, Table } from '@
 import { FixtureMatch } from '@/types/matches';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { storageUri } from '@/config/config';
+import { Button } from '@/components/ui/button';
 
 interface Props {
   matches: FixtureMatch[];
@@ -37,7 +38,18 @@ export function FixtureTable({ matches, fecha }: Props) {
                   </div>
                 </TableCell>
 
-                <TableCell className='text-center'>{match.hora}</TableCell>
+                <TableCell className='text-center'>
+                  <p className='text-3xl font-bold'>{match.hora}</p>
+                  {match.result ? (
+                    <Button className='mt-2' size='sm' variant='outline'>
+                      Ver
+                    </Button>
+                  ) : (
+                    <Button className='mt-2' size='sm'>
+                      Jugar
+                    </Button>
+                  )}
+                </TableCell>
 
                 <TableCell>
                   <div className='flex flex-col items-center'>
