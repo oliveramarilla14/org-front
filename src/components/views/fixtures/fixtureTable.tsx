@@ -10,13 +10,16 @@ interface Props {
 }
 
 export function FixtureTable({ matches, fecha }: Props) {
+  console.log(matches[0]);
   return (
     <div className='border rounded-lg mt-5'>
       <Table>
         <TableHeader>
           <TableRow>
             <TableHead className='text-center'>Equipo 1</TableHead>
+            <TableHead></TableHead>
             <TableHead className='text-center'>Hora</TableHead>
+            <TableHead></TableHead>
             <TableHead className='text-center'>Equipo 2</TableHead>
           </TableRow>
         </TableHeader>
@@ -24,7 +27,7 @@ export function FixtureTable({ matches, fecha }: Props) {
           {matches
             .filter((match) => match.fecha === fecha)
             .map((match) => (
-              <TableRow>
+              <TableRow key={match.id}>
                 <TableCell>
                   <div className='flex  flex-col items-center'>
                     <Avatar className='h-10 w-10 '>
@@ -37,20 +40,25 @@ export function FixtureTable({ matches, fecha }: Props) {
                     <p className='max-w-14 text-center'>{match.FirstTeam.name}</p>
                   </div>
                 </TableCell>
+                <TableCell>
+                  <p className='text-2xl font-bold'>{match.firstTeamGoals ?? '-'}</p>
+                </TableCell>
 
                 <TableCell className='text-center'>
                   <p className='text-3xl font-bold'>{match.hora}</p>
-                  {match.result ? (
-                    <Button className='mt-2' size='sm' variant='outline'>
-                      Ver
-                    </Button>
-                  ) : (
-                    <Button className='mt-2' size='sm'>
-                      Jugar
-                    </Button>
-                  )}
-                </TableCell>
 
+                  <Button
+                    className='mt-2'
+                    size='sm'
+                    variant={`${match.result ? 'outline' : 'default'}`}
+                    onClick={() => console.log(match.id)}
+                  >
+                    {match.result ? 'Ver' : 'Jugar'}
+                  </Button>
+                </TableCell>
+                <TableCell>
+                  <p className='text-2xl font-bold'>{match.secondTeamGoals ?? '-'}</p>
+                </TableCell>
                 <TableCell>
                   <div className='flex flex-col items-center'>
                     <Avatar className='h-10 w-10 '>

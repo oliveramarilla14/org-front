@@ -4,6 +4,8 @@ export interface Match {
   id: number;
   firstTeamId: number;
   secondTeamId: number;
+  firstTeamGoals: number;
+  secondTeamGoals: number;
   hora: string;
   fecha: number;
   result: number | null;
