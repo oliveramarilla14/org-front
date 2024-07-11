@@ -3,6 +3,7 @@ import { FixtureMatch } from '@/types/matches';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { storageUri } from '@/config/config';
 import { Button } from '@/components/ui/button';
+import { useNavigate } from 'react-router-dom';
 
 interface Props {
   matches: FixtureMatch[];
@@ -10,7 +11,7 @@ interface Props {
 }
 
 export function FixtureTable({ matches, fecha }: Props) {
-  console.log(matches[0]);
+  const nav = useNavigate();
   return (
     <div className='border rounded-lg mt-5'>
       <Table>
@@ -51,7 +52,7 @@ export function FixtureTable({ matches, fecha }: Props) {
                     className='mt-2'
                     size='sm'
                     variant={`${match.result ? 'outline' : 'default'}`}
-                    onClick={() => console.log(match.id)}
+                    onClick={() => nav(`/matches/${match.id}`)}
                   >
                     {match.result ? 'Ver' : 'Jugar'}
                   </Button>

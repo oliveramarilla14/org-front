@@ -22,6 +22,7 @@ import MultaShow from './views/multas/multas.show';
 import AmonestationCreate from './views/amonestations/amonestations.create';
 import AmonestationEdit from './views/amonestations/amonestations.edit';
 import FixtureView from './views/fixture/fixture.view';
+import MatchShow from './views/matches/match.show';
 
 function App() {
   const { toast } = useToast();
@@ -38,6 +39,8 @@ function App() {
             <Route path='/' element={<Index />} />
             <Route path='/positions' element={<Positions />} />
             <Route path='/fixture' element={<FixtureView />} />
+
+            <Route path='/matches/:id' element={<MatchShow />} />
 
             {/* clubes */}
             <Route path='/clubs' element={<Clubs />} />
