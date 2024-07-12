@@ -2,24 +2,21 @@ import { Button } from '@/components/ui/button';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Table, TableBody, TableCaption, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
 import { Player } from '@/types/players';
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import TableRowPlayer from './TableRowPlayer';
+import { MatchDataContext } from '@/providers/MatchStoreProvider';
+import { PlayerS } from '@/types/matches';
 
 interface Props {
   players: Player[];
-}
-interface PlayerS {
-  id: string;
-  name: string;
-  goals: number;
-  yellows: number;
-  reds: number;
-  ci: number;
+  team: '1' | '2';
 }
 
-export default function MatchPlayersTable({ players }: Props) {
+export default function MatchPlayersTable({ players, team }: Props) {
+  const { state, dispatch } = useContext(MatchDataContext);
   const [matchPlayers, setMatchPlayers] = useState<PlayerS[]>([]);
   const [selectPlayer, setSelectPlayer] = useState('');
+  console.log(state);
 
   const handleAddPlayer = () => {
     if (!selectPlayer) return;
@@ -32,7 +29,14 @@ export default function MatchPlayersTable({ players }: Props) {
       yellows: 0,
       reds: 0
     };
-    setMatchPlayers((prev) => [...prev, player]);
+    // setMatchPlayers((prev) => [...prev, player]);
+    dispatch({
+      type: 'addPlayer',
+      payload: {
+        stats: player,
+        team
+      }
+    });
   };
 
   return (

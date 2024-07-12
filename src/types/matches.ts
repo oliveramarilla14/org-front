@@ -28,6 +28,15 @@ export interface PlayersOnMatch {
   reds: number;
 }
 
+export interface PlayerS {
+  id: string;
+  name: string;
+  goals: number;
+  yellows: number;
+  reds: number;
+  ci: number;
+}
+
 export interface MatchData {
   match: {
     id: number;
@@ -36,7 +45,7 @@ export interface MatchData {
     result: number;
   };
   playersOnMatch: {
-    team1: (PlayersOnMatch & { conceed: number })[];
-    team2: (PlayersOnMatch & { conceed: number })[];
+    team1: PlayerS[];
+    team2: PlayerS[];
   };
 }
