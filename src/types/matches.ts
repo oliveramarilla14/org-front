@@ -19,3 +19,11 @@ export interface FixtureMatch extends Match {
   FirstTeam: ClubPlayers;
   SecondTeam: ClubPlayers;
 }
+
+export interface PlayersOnMatch {
+  playerId: number;
+  matchId: number;
+  goals: number;
+  yellows: number;
+  reds: number;
+}

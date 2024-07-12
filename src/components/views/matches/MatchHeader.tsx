@@ -12,6 +12,7 @@ function MatchHeader({ match }: Props) {
     firstTeam: 0,
     secondTeam: 0
   };
+
   return (
     <div className='mt-5 flex justify-around'>
       <div className='flex flex-col items-center justify-center gap-3'>
@@ -24,7 +25,7 @@ function MatchHeader({ match }: Props) {
         </Avatar>
         <h1 className=' text-center text-3xl font-bold'>{match.FirstTeam.name}</h1>
 
-        <p className='text-9xl font-bold '>{goals.firstTeam}</p>
+        <p className='text-9xl font-bold '>{goals.firstTeam ?? '-'}</p>
       </div>
 
       <div className='flex flex-col gap-2 items-center'>
@@ -42,7 +43,7 @@ function MatchHeader({ match }: Props) {
           <AvatarFallback>{match.SecondTeam.name.slice(0, 2).toUpperCase()}</AvatarFallback>
         </Avatar>
         <h1 className=' text-center text-3xl font-bold'>{match.SecondTeam.name}</h1>
-        <p className='text-9xl font-bold '>{goals.secondTeam}</p>
+        <p className='text-9xl font-bold '>{goals.secondTeam ?? '-'}</p>
       </div>
     </div>
   );
