@@ -27,3 +27,16 @@ export interface PlayersOnMatch {
   yellows: number;
   reds: number;
 }
+
+export interface MatchData {
+  match: {
+    id: number;
+    firstTeamGoals: number;
+    secondTeamGoals: number;
+    result: number;
+  };
+  playersOnMatch: {
+    team1: (PlayersOnMatch & { conceed: number })[];
+    team2: (PlayersOnMatch & { conceed: number })[];
+  };
+}

@@ -1,10 +1,11 @@
 import { storageUri } from '@/config/config';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { FixtureMatch } from '@/types/matches';
+import { FixtureMatch, PlayersOnMatch } from '@/types/matches';
 
 interface Props {
   match: FixtureMatch;
+  handleSave: (data: PlayersOnMatch) => void;
 }
 
 function MatchHeader({ match }: Props) {
