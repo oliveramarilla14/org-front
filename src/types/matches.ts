@@ -40,7 +40,9 @@ export interface PlayerS {
 export interface MatchData {
   match: {
     id: number;
+    firstTeamId: number;
     firstTeamGoals: number;
+    secondTeamId: number;
     secondTeamGoals: number;
     result: number;
   };
@@ -80,5 +82,11 @@ export type MatchReducerType =
         playerId: string;
         team: '1' | '2';
         stat: StatType;
+      };
+    }
+  | {
+      type: 'setMatch';
+      payload: {
+        match: Match;
       };
     };

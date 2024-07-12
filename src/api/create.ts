@@ -1,7 +1,7 @@
 import { handleFetchError } from '@/helpers/errorHandler';
 import { Amonestation, AmonestationForm } from '@/types/amonestations';
 import { Club } from '@/types/clubs';
-import { PlayersOnMatch } from '@/types/matches';
+import { MatchData, PlayersOnMatch } from '@/types/matches';
 import { Multa, MultaForm } from '@/types/payments';
 import { Player, PlayerWithoutId } from '@/types/players';
 import axios, { AxiosResponse } from 'axios';
@@ -46,11 +46,13 @@ export async function createAmonestationFetcher(url: string, { arg }: { arg: Omi
     handleFetchError(error);
   }
 }
-export async function createPlayerMatchFetcher(url: string, { arg }: { arg: PlayersOnMatch }) {
+export async function createPlayerMatchFetcher(url: string, { arg }: { arg: MatchData }) {
   try {
     const response: AxiosResponse<PlayersOnMatch> = await axios.post<PlayersOnMatch>(url, arg);
+    console.log(response);
     return response.data;
   } catch (error) {
+    console.log(error);
     handleFetchError(error);
   }
 }

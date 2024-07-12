@@ -10,6 +10,8 @@ const defaultMatchData: MatchData = {
   match: {
     id: 0,
     firstTeamGoals: 0,
+    firstTeamId: 0,
+    secondTeamId: 0,
     secondTeamGoals: 0,
     result: 0
   },

@@ -18,7 +18,6 @@ export default function TableRowPlayer({ player, team }: Props) {
   const { dispatch } = useContext(MatchDataContext);
 
   const handleDeletePlayer = (id: PlayerS['id']) => {
-    // setMatchPlayers((prevPlayers) => prevPlayers.filter((player) => player.id !== id));
     dispatch({
       type: 'removePlayer',
       payload: {

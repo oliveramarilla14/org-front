@@ -22,6 +22,11 @@ export function matchReducer(state: MatchData, action: MatchReducerType) {
               : player
         );
 
+        if (action.payload.stat === 'goals') {
+          action.payload.team === '1'
+            ? (draft.match.firstTeamGoals = draft.match.firstTeamGoals + 1)
+            : (draft.match.secondTeamGoals = draft.match.secondTeamGoals + 1);
+        }
         break;
 
       case 'restStats':
@@ -31,6 +36,18 @@ export function matchReducer(state: MatchData, action: MatchReducerType) {
               ? { ...player, [action.payload.stat]: player[action.payload.stat] - 1 }
               : player
         );
+
+        if (action.payload.stat === 'goals') {
+          action.payload.team === '1'
+            ? (draft.match.firstTeamGoals = draft.match.firstTeamGoals - 1)
+            : (draft.match.secondTeamGoals = draft.match.secondTeamGoals - 1);
+        }
+        break;
+
+      case 'setMatch':
+        draft.match.id = action.payload.match.id;
+        draft.match.firstTeamId = action.payload.match.firstTeamId;
+        draft.match.secondTeamId = action.payload.match.secondTeamId;
         break;
 
       default:
