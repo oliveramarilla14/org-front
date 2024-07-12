@@ -49,3 +49,36 @@ export interface MatchData {
     team2: PlayerS[];
   };
 }
+export type StatType = 'goals' | 'yellows' | 'reds';
+
+export type MatchReducerType =
+  | {
+      type: 'addPlayer';
+      payload: {
+        stats: PlayerS;
+        team: '1' | '2';
+      };
+    }
+  | {
+      type: 'removePlayer';
+      payload: {
+        playerId: string;
+        team: '1' | '2';
+      };
+    }
+  | {
+      type: 'addStats';
+      payload: {
+        playerId: string;
+        team: '1' | '2';
+        stat: StatType;
+      };
+    }
+  | {
+      type: 'restStats';
+      payload: {
+        playerId: string;
+        team: '1' | '2';
+        stat: StatType;
+      };
+    };

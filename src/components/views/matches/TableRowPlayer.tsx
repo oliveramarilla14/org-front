@@ -4,37 +4,49 @@ import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover
 import { TableCell, TableRow } from '@/components/ui/table';
 import { CircleMinus, CirclePlus, TextSelect } from 'lucide-react';
 import { Label } from '@/components/ui/label';
+import { MatchDataContext } from '@/providers/MatchStoreProvider';
+import { useContext } from 'react';
+import { PlayerS, StatType } from '@/types/matches';
 
 interface Props {
   player: PlayerS;
-  setMatchPlayers: React.Dispatch<React.SetStateAction<PlayerS[]>>;
-}
-type StatType = 'goals' | 'yellows' | 'reds';
-interface PlayerS {
-  id: string;
-  name: string;
-  goals: number;
-  yellows: number;
-  reds: number;
-  ci: number;
+  team: '1' | '2';
 }
 
-export default function TableRowPlayer({ player, setMatchPlayers }: Props) {
+export default function TableRowPlayer({ player, team }: Props) {
   const stats: StatType[] = ['goals', 'yellows', 'reds'];
+  const { dispatch } = useContext(MatchDataContext);
 
   const handleDeletePlayer = (id: PlayerS['id']) => {
-    setMatchPlayers((prevPlayers) => prevPlayers.filter((player) => player.id !== id));
+    // setMatchPlayers((prevPlayers) => prevPlayers.filter((player) => player.id !== id));
+    dispatch({
+      type: 'removePlayer',
+      payload: {
+        playerId: id,
+        team
+      }
+    });
   };
   const handleAddStats = (stat: StatType, id: PlayerS['id']) => {
-    setMatchPlayers((prevPlayers) =>
-      prevPlayers.map((player) => (player.id === id ? { ...player, [stat]: player[stat] + 1 } : player))
-    );
+    dispatch({
+      type: 'addStats',
+      payload: {
+        playerId: id,
+        stat,
+        team
+      }
+    });
   };
 
   const handleRestStats = (stat: StatType, id: PlayerS['id']) => {
-    setMatchPlayers((prevPlayers) =>
-      prevPlayers.map((player) => (player.id === id ? { ...player, [stat]: player[stat] - 1 } : player))
-    );
+    dispatch({
+      type: 'restStats',
+      payload: {
+        playerId: id,
+        stat,
+        team
+      }
+    });
   };
 
   return (

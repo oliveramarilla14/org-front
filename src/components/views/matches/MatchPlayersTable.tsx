@@ -13,10 +13,8 @@ interface Props {
 }
 
 export default function MatchPlayersTable({ players, team }: Props) {
-  const { state, dispatch } = useContext(MatchDataContext);
-  const [matchPlayers, setMatchPlayers] = useState<PlayerS[]>([]);
+  const { dispatch, state } = useContext(MatchDataContext);
   const [selectPlayer, setSelectPlayer] = useState('');
-  console.log(state);
 
   const handleAddPlayer = () => {
     if (!selectPlayer) return;
@@ -29,7 +27,6 @@ export default function MatchPlayersTable({ players, team }: Props) {
       yellows: 0,
       reds: 0
     };
-    // setMatchPlayers((prev) => [...prev, player]);
     dispatch({
       type: 'addPlayer',
       payload: {
@@ -54,8 +51,8 @@ export default function MatchPlayersTable({ players, team }: Props) {
           </TableRow>
         </TableHeader>
         <TableBody>
-          {matchPlayers.map((player) => (
-            <TableRowPlayer player={player} setMatchPlayers={setMatchPlayers} key={player.id} />
+          {state.playersOnMatch[`team${team}`].map((player) => (
+            <TableRowPlayer player={player} team={team} key={player.id} />
           ))}
 
           <TableRow>
@@ -66,7 +63,9 @@ export default function MatchPlayersTable({ players, team }: Props) {
                 </SelectTrigger>
                 <SelectContent>
                   {players
-                    .filter((player) => !matchPlayers.some((play) => play.id === player.id.toString()))
+                    .filter(
+                      (player) => !state.playersOnMatch[`team${team}`].some((play) => play.id === player.id.toString())
+                    )
                     .map((player) => (
                       <SelectItem key={player.id} value={player.id.toString()}>
                         {player.name}
