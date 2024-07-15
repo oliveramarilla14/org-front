@@ -16,9 +16,9 @@ type Props = {
   open: boolean;
   title: string;
   description?: string;
-  variant: 'destructive';
+  variant?: 'destructive' | 'default';
 };
-function ActionModal({ open, onOpenChange, onConfirm, variant, title, description }: Props) {
+function ActionModal({ open, onOpenChange, onConfirm, variant = 'default', title, description }: Props) {
   return (
     <Dialog open={open} onOpenChange={onOpenChange}>
       <DialogContent>
@@ -29,6 +29,7 @@ function ActionModal({ open, onOpenChange, onConfirm, variant, title, descriptio
         <DialogFooter>
           <Button variant={variant} onClick={onConfirm}>
             {variant === 'destructive' && 'Eliminar'}
+            {variant === 'default' && 'Confirmar'}
           </Button>
           <DialogClose asChild>
             <Button variant='ghost'>Cancelar</Button>

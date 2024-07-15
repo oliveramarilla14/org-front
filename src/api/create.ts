@@ -49,10 +49,16 @@ export async function createAmonestationFetcher(url: string, { arg }: { arg: Omi
 export async function createPlayerMatchFetcher(url: string, { arg }: { arg: MatchData }) {
   try {
     const response: AxiosResponse<PlayersOnMatch> = await axios.post<PlayersOnMatch>(url, arg);
-    console.log(response);
     return response.data;
   } catch (error) {
-    console.log(error);
+    handleFetchError(error);
+  }
+}
+export async function generateFixtureFetcher(url: string) {
+  try {
+    const response = await axios.post(url);
+    return response.data;
+  } catch (error) {
     handleFetchError(error);
   }
 }

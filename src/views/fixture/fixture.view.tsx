@@ -1,4 +1,6 @@
 import Layout from '@/Layouts/Layout';
+import { generateFixtureFetcher } from '@/api/create';
+import ActionModal from '@/components/modals/ActionModal';
 import { Button } from '@/components/ui/button';
 import { Pagination, PaginationContent, PaginationItem } from '@/components/ui/pagination';
 import { FixtureTable } from '@/components/views/fixtures/fixtureTable';
@@ -7,10 +9,13 @@ import { FixtureMatch } from '@/types/matches';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useMemo, useState } from 'react';
 import useSWR from 'swr';
+import useSWRMutation from 'swr/mutation';
 
 export default function FixtureView() {
   const [fecha, setFecha] = useState(1);
-  const { data: matches, isLoading } = useSWR<FixtureMatch[]>(`${apiUri}/matches`);
+  const [openConfirm, setOpenConfirm] = useState(false);
+  const { data: matches, isLoading, mutate } = useSWR<FixtureMatch[]>(`${apiUri}/matches`);
+  const { trigger } = useSWRMutation(`${apiUri}/matches/fixture/generate`, generateFixtureFetcher);
 
   const maxFecha = useMemo(() => {
     return matches
@@ -19,6 +24,13 @@ export default function FixtureView() {
         }, 0)
       : 1;
   }, [matches]);
+
+  const handleGenerate = async () => {
+    console.log(true);
+    await trigger();
+    mutate();
+    setOpenConfirm(false);
+  };
 
   return (
     <Layout title='Fixture' isLoading={isLoading}>
@@ -44,8 +56,24 @@ export default function FixtureView() {
           </PaginationContent>
         </Pagination>
       </div>
+      {!matches || matches?.length === 0 ? (
+        <div className='flex flex-col mt-5 items-center gap-5'>
+          No existe un fixture
+          <Button onClick={() => setOpenConfirm(true)}>Generar fixture</Button>
+          <p className='text-muted-foreground text-sm'>Generar solo al tener todos los equipos registrados!</p>
+        </div>
+      ) : (
+        <FixtureTable matches={matches} fecha={fecha} />
+      )}
 
-      <FixtureTable matches={matches ?? []} fecha={fecha} />
+      <ActionModal
+        open={openConfirm}
+        onOpenChange={setOpenConfirm}
+        onConfirm={handleGenerate}
+        variant='default'
+        title='Generar Fixture'
+        description='Se generara un fixture con los equipos existentes, no se podrá agregar equipos al fixture creado.'
+      />
     </Layout>
   );
 }
