@@ -3,9 +3,11 @@ import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
 import { FixtureMatch } from '@/types/matches';
 import { MatchDataContext } from '@/providers/MatchStoreProvider';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import useSWRMutation from 'swr/mutation';
 import { createPlayerMatchFetcher } from '@/api/create';
+import { mutate } from 'swr';
+import ActionModal from '@/components/modals/ActionModal';
 
 interface Props {
   match: FixtureMatch;
@@ -14,9 +16,12 @@ interface Props {
 function MatchHeader({ match }: Props) {
   const { state, dispatch } = useContext(MatchDataContext);
   const { trigger } = useSWRMutation(`${apiUri}/matches/finish`, createPlayerMatchFetcher);
+  const [openConfirm, setOpenConfirm] = useState(false);
 
   const handleClick = async () => {
     await trigger(state);
+    mutate(`${apiUri}/matches/${match.id}`);
+    setOpenConfirm(false);
   };
 
   useEffect(() => {
@@ -64,7 +69,7 @@ function MatchHeader({ match }: Props) {
       <div className='flex flex-col gap-2 items-center'>
         <h2 className='text-3xl '>Fecha {match.fecha}</h2>
         <h3 className='text-2xl text-muted-foreground'>{match.hora}</h3>
-        {match.result ? '' : <Button onClick={handleClick}>Finalizar</Button>}
+        {match.result ? '' : <Button onClick={() => setOpenConfirm(true)}>Finalizar</Button>}
       </div>
 
       <div className='flex flex-col items-center justify-center gap-3'>
@@ -80,6 +85,15 @@ function MatchHeader({ match }: Props) {
           {match.result ? match.secondTeamGoals : state.match.secondTeamGoals ?? '-'}
         </p>
       </div>
+
+      <ActionModal
+        open={openConfirm}
+        onOpenChange={setOpenConfirm}
+        onConfirm={handleClick}
+        variant='default'
+        title='Finalizar encuentro'
+        description='Verifique que los datos ingresados son correctos.'
+      />
     </div>
   );
 }
