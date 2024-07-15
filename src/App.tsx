@@ -23,6 +23,7 @@ import AmonestationCreate from './views/amonestations/amonestations.create';
 import AmonestationEdit from './views/amonestations/amonestations.edit';
 import FixtureView from './views/fixture/fixture.view';
 import MatchShow from './views/matches/match.show';
+import ConfigView from './views/config/config.view';
 
 function App() {
   const { toast } = useToast();
@@ -62,6 +63,8 @@ function App() {
             <Route path='/amonestations' element={<AmonestationsView />} />
             <Route path='/amonestations/crear' element={<AmonestationCreate />} />
             <Route path='/amonestations/:id/edit' element={<AmonestationEdit />} />
+
+            <Route path='/config' element={<ConfigView />} />
 
             <Route path='/test' element={<Test />} />
             <Route path='*' element={<NotFound />} />
