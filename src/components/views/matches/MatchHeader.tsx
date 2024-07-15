@@ -40,13 +40,13 @@ function MatchHeader({ match }: Props) {
         </Avatar>
         <h1 className=' text-center text-3xl font-bold'>{match.FirstTeam.name}</h1>
 
-        <p className='text-9xl font-bold '>{state.match.firstTeamGoals ?? '-'}</p>
+        <p className='text-9xl font-bold '>{match.result ? match.firstTeamGoals : state.match.firstTeamGoals ?? '-'}</p>
       </div>
 
       <div className='flex flex-col gap-2 items-center'>
         <h2 className='text-3xl '>Fecha {match.fecha}</h2>
         <h3 className='text-2xl text-muted-foreground'>{match.hora}</h3>
-        <Button onClick={handleClick}>Finalizar</Button>
+        {match.result ? '' : <Button onClick={handleClick}>Finalizar</Button>}
       </div>
 
       <div className='flex flex-col items-center justify-center gap-3'>
@@ -58,7 +58,9 @@ function MatchHeader({ match }: Props) {
           <AvatarFallback>{match.SecondTeam.name.slice(0, 2).toUpperCase()}</AvatarFallback>
         </Avatar>
         <h1 className=' text-center text-3xl font-bold'>{match.SecondTeam.name}</h1>
-        <p className='text-9xl font-bold '>{state.match.secondTeamGoals ?? '-'}</p>
+        <p className='text-9xl font-bold '>
+          {match.result ? match.secondTeamGoals : state.match.secondTeamGoals ?? '-'}
+        </p>
       </div>
     </div>
   );
