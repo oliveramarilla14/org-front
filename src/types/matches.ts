@@ -15,9 +15,23 @@ export interface Match {
 interface ClubPlayers extends Club {
   players: Player[];
 }
+
+export interface finishTeamPlayer {
+  clubId: number;
+  goals: number;
+  id: number;
+  matchId: number;
+  playerId: number;
+  red: number;
+  yellow: number;
+  Player: Player;
+}
+
 export interface FixtureMatch extends Match {
   FirstTeam: ClubPlayers;
   SecondTeam: ClubPlayers;
+  team1?: finishTeamPlayer[];
+  team2?: finishTeamPlayer[];
 }
 
 export interface PlayersOnMatch {
@@ -58,6 +72,13 @@ export type MatchReducerType =
       type: 'addPlayer';
       payload: {
         stats: PlayerS;
+        team: '1' | '2';
+      };
+    }
+  | {
+      type: 'setTeam';
+      payload: {
+        teamStats: finishTeamPlayer[];
         team: '1' | '2';
       };
     }

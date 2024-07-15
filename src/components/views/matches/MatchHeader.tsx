@@ -26,6 +26,24 @@ function MatchHeader({ match }: Props) {
         match: match
       }
     });
+    if (match.result) {
+      match.team1 &&
+        dispatch({
+          type: 'setTeam',
+          payload: {
+            team: '1',
+            teamStats: match.team1
+          }
+        });
+      match.team2 &&
+        dispatch({
+          type: 'setTeam',
+          payload: {
+            team: '2',
+            teamStats: match.team2
+          }
+        });
+    }
   }, [match, dispatch]);
 
   return (

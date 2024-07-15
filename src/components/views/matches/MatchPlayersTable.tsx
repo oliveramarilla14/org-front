@@ -39,7 +39,7 @@ export default function MatchPlayersTable({ players, team }: Props) {
   return (
     <>
       <Table className='border'>
-        <TableCaption>Debe finalizar el partido para guardar los datos!</TableCaption>
+        {!!state.match.result || <TableCaption>Debe finalizar el partido para guardar los datos!</TableCaption>}
         <TableHeader>
           <TableRow>
             <TableHead>Nombre</TableHead>
@@ -55,29 +55,32 @@ export default function MatchPlayersTable({ players, team }: Props) {
             <TableRowPlayer player={player} team={team} key={player.id} />
           ))}
 
-          <TableRow>
-            <TableCell colSpan={5}>
-              <Select onValueChange={(value) => setSelectPlayer(value)} value={selectPlayer}>
-                <SelectTrigger>
-                  <SelectValue placeholder='Agregar Jugador' />
-                </SelectTrigger>
-                <SelectContent>
-                  {players
-                    .filter(
-                      (player) => !state.playersOnMatch[`team${team}`].some((play) => play.id === player.id.toString())
-                    )
-                    .map((player) => (
-                      <SelectItem key={player.id} value={player.id.toString()}>
-                        {player.name}
-                      </SelectItem>
-                    ))}
-                </SelectContent>
-              </Select>
-            </TableCell>
-            <TableCell>
-              <Button onClick={handleAddPlayer}> Agregar</Button>
-            </TableCell>
-          </TableRow>
+          {!!state.match.result || (
+            <TableRow>
+              <TableCell colSpan={5}>
+                <Select onValueChange={(value) => setSelectPlayer(value)} value={selectPlayer}>
+                  <SelectTrigger>
+                    <SelectValue placeholder='Agregar Jugador' />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {players
+                      .filter(
+                        (player) =>
+                          !state.playersOnMatch[`team${team}`].some((play) => play.id === player.id.toString())
+                      )
+                      .map((player) => (
+                        <SelectItem key={player.id} value={player.id.toString()}>
+                          {player.name}
+                        </SelectItem>
+                      ))}
+                  </SelectContent>
+                </Select>
+              </TableCell>
+              <TableCell>
+                <Button onClick={handleAddPlayer}> Agregar</Button>
+              </TableCell>
+            </TableRow>
+          )}
         </TableBody>
       </Table>
     </>

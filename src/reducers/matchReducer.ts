@@ -7,7 +7,16 @@ export function matchReducer(state: MatchData, action: MatchReducerType) {
       case 'addPlayer':
         draft.playersOnMatch[`team${action.payload.team}`].push(action.payload.stats);
         break;
-
+      case 'setTeam':
+        draft.playersOnMatch[`team${action.payload.team}`] = action.payload.teamStats.map((stat) => ({
+          id: stat.id.toString(),
+          ci: stat.Player.documentNumber,
+          name: stat.Player.name,
+          goals: stat.goals,
+          reds: stat.red,
+          yellows: stat.yellow
+        }));
+        break;
       case 'removePlayer':
         draft.playersOnMatch[`team${action.payload.team}`] = draft.playersOnMatch[`team${action.payload.team}`].filter(
           (stat) => stat.id !== action.payload.playerId
@@ -46,6 +55,7 @@ export function matchReducer(state: MatchData, action: MatchReducerType) {
 
       case 'setMatch':
         draft.match.id = action.payload.match.id;
+        draft.match.result = action.payload.match.result ?? 0;
         draft.match.firstTeamId = action.payload.match.firstTeamId;
         draft.match.secondTeamId = action.payload.match.secondTeamId;
         break;
