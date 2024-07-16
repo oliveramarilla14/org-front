@@ -5,17 +5,24 @@ import { Button } from '@/components/ui/button';
 import { Pagination, PaginationContent, PaginationItem } from '@/components/ui/pagination';
 import { FixtureTable } from '@/components/views/fixtures/fixtureTable';
 import { apiUri } from '@/config/config';
+import { getLocalFecha, setLocalFecha } from '@/helpers/localStorage.helper';
 import { FixtureMatch } from '@/types/matches';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import useSWR from 'swr';
 import useSWRMutation from 'swr/mutation';
 
 export default function FixtureView() {
-  const [fecha, setFecha] = useState(1);
+  const fechaInit = getLocalFecha();
+
+  const [fecha, setFecha] = useState(fechaInit ? parseInt(fechaInit) : 1);
   const [openConfirm, setOpenConfirm] = useState(false);
   const { data: matches, isLoading, mutate } = useSWR<FixtureMatch[]>(`${apiUri}/matches`);
   const { trigger } = useSWRMutation(`${apiUri}/matches/fixture/generate`, generateFixtureFetcher);
+
+  useEffect(() => {
+    setLocalFecha(fecha);
+  }, [fecha]);
 
   const maxFecha = useMemo(() => {
     return matches
@@ -26,7 +33,6 @@ export default function FixtureView() {
   }, [matches]);
 
   const handleGenerate = async () => {
-    console.log(true);
     await trigger();
     mutate();
     setOpenConfirm(false);

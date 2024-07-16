@@ -8,14 +8,18 @@ interface Props extends Partial<ChildrenProps> {
   title: string;
   className?: string;
   link: string;
+  icon?: React.ReactNode;
 }
 
-export default function Bento({ title, children, className, link }: Props) {
+export default function Bento({ title, children, className, link, icon }: Props) {
   return (
     <Card className={className}>
       <CardHeader className='flex flex-row items-center'>
         <div className='grid gap-2'>
-          <CardTitle>{title}</CardTitle>
+          <CardTitle className='flex gap-2'>
+            {icon && icon}
+            {title}
+          </CardTitle>
         </div>
         <Button asChild size='sm' className='ml-auto gap-1'>
           <Link to={link} className='bg-transparent hover:bg-transparent'>
