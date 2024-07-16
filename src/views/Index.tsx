@@ -25,7 +25,7 @@ export default function Index() {
     `${apiUri}/clubs/positions`
   );
   const { data: matches = [], isLoading: matchesLoading } = useSWR<FixtureMatch[], CustomAxiosError>(
-    `${apiUri}/matches/fixture/${fecha}`
+    fecha ? `${apiUri}/matches/fixture/${fecha}` : null
   );
   return (
     <Layout isLoading={teamsLoading && matchesLoading} title='Exa Campoverde'>
