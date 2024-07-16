@@ -22,11 +22,11 @@ export default function ShowClubData({ club }: Props) {
 
   return (
     <>
-      <div className='grid grid-cols-6 '>
-        <div className='col-span-2 flex flex-col gap-10 items-center'>
+      <div className='grid md:grid-cols-6 gap-5'>
+        <div className='md:col-span-2 flex flex-col gap-10 items-center'>
           <ClubShowInfo club={club} setOpenEdit={setOpenEdit} />
         </div>
-        <div className='col-span-4 place-self-center'>
+        <div className='md:col-span-4 md:place-self-center  overflow-x-auto'>
           <PlayersDataTable players={club.players} />
           <Link to={`/players/add?team=${id}`}>
             <Button className='mt-4'>Agregar Jugador</Button>
@@ -41,7 +41,7 @@ export default function ShowClubData({ club }: Props) {
           </DialogHeader>
           <DialogDescription></DialogDescription>
           <ClubForm club={club} trigger={trigger} isMutating={isMutating} onSave={() => setOpenEdit(false)}>
-            <DialogFooter>
+            <DialogFooter className='gap-3 '>
               <Button type='submit'>Confirmar</Button>
               <DialogClose asChild>
                 <Button type='button' variant='secondary'>

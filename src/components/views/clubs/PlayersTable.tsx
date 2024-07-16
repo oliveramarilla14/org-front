@@ -27,7 +27,7 @@ export default function PlayersDataTable({ players }: Props) {
   };
 
   return (
-    <Table className='w-90'>
+    <Table>
       <TableHeader>
         <TableRow>
           <TableHead>Jugador</TableHead>

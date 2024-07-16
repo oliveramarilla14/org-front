@@ -16,7 +16,7 @@ export default function Layout({ children, isLoading = false, title, create }: P
   return (
     <>
       <Header />
-      <div className='container mb-5'>
+      <div className='container mb-10'>
         <div className='mt-10 flex justify-between'>
           <HeadTitle>{title || ''}</HeadTitle>
 

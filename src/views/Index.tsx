@@ -30,12 +30,12 @@ export default function Index() {
   return (
     <Layout isLoading={teamsLoading && matchesLoading} title='Exa Campoverde'>
       <div className='grid md:grid-cols-12 gap-4 mt-4'>
-        <Bento title='Fixture' className='md:col-span-7' link='/fixture' icon={<LandPlot />}>
-          <ScrollArea className='h-72 rounded-md border"'>
+        <Bento title='Fixture' className='md:col-span-7 overflow-x-auto' link='/fixture' icon={<LandPlot />}>
+          <ScrollArea className='h-72 rounded-md border w-fit"'>
             <FixtureTableReduced matches={matches ?? []} />
           </ScrollArea>
         </Bento>
-        <Bento title='Tabla' className='md:col-span-5 ' link='positions' icon={<Sheet />}>
+        <Bento title='Tabla' className='md:col-span-5 overflow-x-auto ' link='positions' icon={<Sheet />}>
           <ScrollArea className='h-72 rounded-md border"'>
             <PositionTable teams={teams} reduced />
           </ScrollArea>

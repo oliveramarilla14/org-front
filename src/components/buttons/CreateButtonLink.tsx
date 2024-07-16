@@ -12,7 +12,7 @@ export default function CreateButtonLink({ className, to }: Props) {
     <Link to={to ?? './crear'}>
       <Button size='lg' className={`${className}`}>
         <CirclePlus />
-        &nbsp; Agregar
+        <span className='hidden md:inline'>&nbsp; Agregar</span>
       </Button>
     </Link>
   );

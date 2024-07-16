@@ -39,16 +39,20 @@ export default function PlayerCreate() {
         <div className='flex justify-end mb-2'>
           <div className='flex flex-col items-end'>
             <AlertDialogTrigger asChild>
-              <Button>{isMutating ? 'Guardando...' : 'Guardar'}</Button>
+              <Button className='md:block hidden'>{isMutating ? 'Guardando...' : 'Guardar'}</Button>
             </AlertDialogTrigger>
 
             {error && <p className='text-destructive mt-1'>{error.message}</p>}
           </div>
         </div>
-        <div className='grid grid-cols-2'>
+        <div className='grid md:grid-cols-2 gap-5'>
           <PlayersForm setPlayers={setPlayers} />
 
           <PlayersCreateTable players={players} handleDelete={handleDelete} disabled={isMutating} />
+
+          <AlertDialogTrigger asChild>
+            <Button className='md:hidden block my-5'>{isMutating ? 'Guardando...' : 'Guardar'}</Button>
+          </AlertDialogTrigger>
         </div>
 
         <AlertDialogContent>
