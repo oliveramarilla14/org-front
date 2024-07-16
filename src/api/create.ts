@@ -1,10 +1,12 @@
 import { handleFetchError } from '@/helpers/errorHandler';
 import { Amonestation, AmonestationForm } from '@/types/amonestations';
 import { Club } from '@/types/clubs';
+import { configFormSchema } from '@/types/config';
 import { MatchData, PlayersOnMatch } from '@/types/matches';
 import { Multa, MultaForm } from '@/types/payments';
 import { Player, PlayerWithoutId } from '@/types/players';
 import axios, { AxiosResponse } from 'axios';
+import { z } from 'zod';
 
 export async function createClubFetcher(url: string, { arg }: { arg: FormData }) {
   try {
@@ -57,6 +59,15 @@ export async function createPlayerMatchFetcher(url: string, { arg }: { arg: Matc
 export async function generateFixtureFetcher(url: string) {
   try {
     const response = await axios.post(url);
+    return response.data;
+  } catch (error) {
+    handleFetchError(error);
+  }
+}
+
+export async function generateConfigFetcher(url: string, { arg }: { arg: z.infer<typeof configFormSchema> }) {
+  try {
+    const response = await axios.post(url, arg);
     return response.data;
   } catch (error) {
     handleFetchError(error);
