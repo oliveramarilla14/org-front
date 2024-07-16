@@ -15,7 +15,7 @@ type FormType = z.infer<typeof clubFormSchema>;
 
 type Props = {
   club?: Club;
-  trigger: TriggerWithArgs<Club, CustomAxiosError, string, FormData>;
+  trigger?: TriggerWithArgs<Club, CustomAxiosError, string, FormData>;
   isMutating: boolean;
   children?: ReactNode;
   onSave: () => void;
@@ -39,7 +39,7 @@ export default function ClubForm({ club, trigger, isMutating, children, onSave }
     saveData.append('badge', values.badge ? values.badge[0] : '');
     saveData.append('payment', values.payment ? 'true' : 'false');
 
-    await trigger(saveData);
+    trigger && (await trigger(saveData));
     onSave();
   }
   const handleCancel = () => navigate(-1);
