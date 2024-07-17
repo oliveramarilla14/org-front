@@ -54,34 +54,36 @@ function MatchHeader({ match }: Props) {
   return (
     <div className='mt-5 flex justify-around'>
       <div className='flex flex-col items-center justify-center gap-3'>
-        <Avatar className='h-40 w-40 '>
+        <Avatar className='md:h-40 md:w-40 '>
           <AvatarImage
             src={match.FirstTeam?.badge ? `${storageUri}/files/badge/${match.FirstTeam?.badge}` : ''}
             className='object-cover'
           />
           <AvatarFallback>{match.FirstTeam.name.slice(0, 2).toUpperCase()}</AvatarFallback>
         </Avatar>
-        <h1 className=' text-center text-3xl font-bold'>{match.FirstTeam.name}</h1>
+        <h1 className=' text-center md:text-3xl font-bold'>{match.FirstTeam.name}</h1>
 
-        <p className='text-9xl font-bold '>{match.result ? match.firstTeamGoals : state.match.firstTeamGoals ?? '-'}</p>
+        <p className=' text-5xl md:text-9xl font-bold '>
+          {match.result ? match.firstTeamGoals : state.match.firstTeamGoals ?? '-'}
+        </p>
       </div>
 
-      <div className='flex flex-col gap-2 items-center'>
-        <h2 className='text-3xl '>Fecha {match.fecha}</h2>
-        <h3 className='text-2xl text-muted-foreground'>{match.hora}</h3>
+      <div className='flex flex-col gap-2 items-center justify-center md:justify-normal'>
+        <h2 className='md:text-3xl '>Fecha {match.fecha}</h2>
+        <h3 className='md:text-2xl text-muted-foreground'>{match.hora}</h3>
         {match.result ? '' : <Button onClick={() => setOpenConfirm(true)}>Finalizar</Button>}
       </div>
 
       <div className='flex flex-col items-center justify-center gap-3'>
-        <Avatar className='h-40 w-40 '>
+        <Avatar className='md:h-40 md:w-40 '>
           <AvatarImage
             src={match.SecondTeam?.badge ? `${storageUri}/files/badge/${match.SecondTeam?.badge}` : ''}
             className='object-cover'
           />
           <AvatarFallback>{match.SecondTeam.name.slice(0, 2).toUpperCase()}</AvatarFallback>
         </Avatar>
-        <h1 className=' text-center text-3xl font-bold'>{match.SecondTeam.name}</h1>
-        <p className='text-9xl font-bold '>
+        <h1 className=' text-center md:text-3xl font-bold'>{match.SecondTeam.name}</h1>
+        <p className='text-5xl md:text-9xl font-bold '>
           {match.result ? match.secondTeamGoals : state.match.secondTeamGoals ?? '-'}
         </p>
       </div>

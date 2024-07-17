@@ -5,6 +5,15 @@ import { Payment } from '@/types/payments';
 import { Player } from '@/types/players';
 import axios from 'axios';
 
+export async function deleteDefault(url: string) {
+  try {
+    const { data } = await axios.delete(url);
+
+    return data;
+  } catch (error) {
+    handleFetchError(error);
+  }
+}
 export async function deleteClubFetcher(url: string) {
   try {
     const { data } = await axios.delete<Club>(url);

@@ -15,7 +15,6 @@ interface Props {
 export default function MatchPlayersTable({ players, team }: Props) {
   const { dispatch, state } = useContext(MatchDataContext);
   const [selectPlayer, setSelectPlayer] = useState('');
-
   const handleAddPlayer = () => {
     if (!selectPlayer) return;
     setSelectPlayer('');
@@ -41,6 +40,11 @@ export default function MatchPlayersTable({ players, team }: Props) {
       <Table className='border'>
         {!!state.match.result || <TableCaption>Debe finalizar el partido para guardar los datos!</TableCaption>}
         <TableHeader>
+          {/* <TableRow>
+            <TableHead colSpan={6} className='text-center md:hidden'>
+              hola
+            </TableHead>
+          </TableRow> */}
           <TableRow>
             <TableHead>Nombre</TableHead>
             <TableHead>CI</TableHead>

@@ -30,7 +30,7 @@ export default function ConfigForm({ config }: Props) {
     yellowAmountToMatch: config?.yellowAmountToMatch?.toString() || '',
     redCardMatches: config?.redCardMatches?.toString() || '',
     woAmonestation: config?.woAmonestation ?? false,
-    woPrice: config?.woPrice?.toString() || '',
+    woPrice: config?.woPrice?.toString() || '0',
     inscriptionPrice: config?.inscriptionPrice?.toString() || '',
     monthSocialPrice: config?.monthSocialPrice?.toString() || '',
     monthSocialPayDay: config?.monthSocialPayDay?.toString() || '',

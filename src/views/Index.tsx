@@ -1,5 +1,5 @@
 import Layout from '@/Layouts/Layout';
-import { ScrollArea } from '@/components/ui/scroll-area';
+import { ScrollArea, ScrollBar } from '@/components/ui/scroll-area';
 import FixtureTableReduced from '@/components/views/fixtures/fixtureTableReduced';
 import Bento from '@/components/views/homepage/Bento';
 import PositionTable from '@/components/views/positions/PositionTable';
@@ -33,11 +33,13 @@ export default function Index() {
         <Bento title='Fixture' className='md:col-span-7 overflow-x-auto' link='/fixture' icon={<LandPlot />}>
           <ScrollArea className='h-72 rounded-md border w-fit"'>
             <FixtureTableReduced matches={matches ?? []} />
+            <ScrollBar orientation='horizontal' className='md:hidden' />
           </ScrollArea>
         </Bento>
         <Bento title='Tabla' className='md:col-span-5 overflow-x-auto ' link='positions' icon={<Sheet />}>
           <ScrollArea className='h-72 rounded-md border"'>
             <PositionTable teams={teams} reduced />
+            <ScrollBar orientation='horizontal' className='md:hidden' />
           </ScrollArea>
         </Bento>
         <Bento title='Equipos' className='md:col-span-4' link='/clubs' icon={<ShieldHalf />} />
