@@ -40,6 +40,7 @@ export default function StatsTable({ stats, renderCells, columns, sortBy }: Prop
 
         {sortBy &&
           stats
+            .filter((stat) => stat[sortBy] !== 0)
             .sort((a, b) => b[sortBy] - a[sortBy])
             .map((stat, i) => (
               <TableRow className='text-lg' key={stat.playerId}>

@@ -53,29 +53,36 @@ export default function PositionTable({ teams, reduced = false }: Props) {
           </TableRow>
         )}
 
-        {teams.map((team) => (
-          <TableRow className='text-lg' key={team.clubId}>
-            <TableCell>{team.position}</TableCell>
-            <TableCell className='flex flex-col items-center gap-1 font-bold text-lg'>
-              {reduced ||
-                (!!team.Club.badge && <img className='w-10' src={`${storageUri}/files/badge/${team.Club.badge}`} />)}
-              {team.Club.name}
-            </TableCell>
-            <TableCell>{team.points}</TableCell>
-            <TableCell>{team.played}</TableCell>
-            <TableCell>{team.win}</TableCell>
-            <TableCell>{team.draw}</TableCell>
-            <TableCell>{team.loose}</TableCell>
-            {reduced || (
-              <>
-                <TableCell>{team.goals}</TableCell>
-                <TableCell>{team.conceed}</TableCell>
-                <TableCell>{team.yellows}</TableCell>
-                <TableCell>{team.reds}</TableCell>
-              </>
-            )}
-          </TableRow>
-        ))}
+        {teams
+          .sort((a, b) => {
+            if (a.position && b.position) {
+              return a.position - b.position;
+            }
+            return 0;
+          })
+          .map((team) => (
+            <TableRow className='text-lg' key={team.clubId}>
+              <TableCell>{team.position}</TableCell>
+              <TableCell className='flex flex-col items-center gap-1 font-bold text-lg'>
+                {reduced ||
+                  (!!team.Club.badge && <img className='w-10' src={`${storageUri}/files/badge/${team.Club.badge}`} />)}
+                {team.Club.name}
+              </TableCell>
+              <TableCell>{team.points}</TableCell>
+              <TableCell>{team.played}</TableCell>
+              <TableCell>{team.win}</TableCell>
+              <TableCell>{team.draw}</TableCell>
+              <TableCell>{team.loose}</TableCell>
+              {reduced || (
+                <>
+                  <TableCell>{team.goals}</TableCell>
+                  <TableCell>{team.conceed}</TableCell>
+                  <TableCell>{team.yellows}</TableCell>
+                  <TableCell>{team.reds}</TableCell>
+                </>
+              )}
+            </TableRow>
+          ))}
       </TableBody>
     </Table>
   );
