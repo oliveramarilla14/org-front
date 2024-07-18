@@ -1,11 +1,11 @@
 import { apiUri, storageUri } from '@/config/config';
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar';
 import { Button } from '@/components/ui/button';
-import { FixtureMatch } from '@/types/matches';
+import { FixtureMatch, MatchData, PlayersOnMatch } from '@/types/matches';
 import { MatchDataContext } from '@/providers/MatchStoreProvider';
 import { useContext, useEffect, useState } from 'react';
 import useSWRMutation from 'swr/mutation';
-import { createPlayerMatchFetcher } from '@/api/create';
+import createFetcher from '@/api/create';
 import { mutate } from 'swr';
 import ActionModal from '@/components/modals/ActionModal';
 
@@ -15,7 +15,7 @@ interface Props {
 
 function MatchHeader({ match }: Props) {
   const { state, dispatch } = useContext(MatchDataContext);
-  const { trigger } = useSWRMutation(`${apiUri}/matches/finish`, createPlayerMatchFetcher);
+  const { trigger } = useSWRMutation(`${apiUri}/matches/finish`, createFetcher<MatchData, PlayersOnMatch>);
   const [openConfirm, setOpenConfirm] = useState(false);
 
   const handleClick = async () => {

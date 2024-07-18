@@ -1,12 +1,18 @@
 import { handleFetchError } from '@/helpers/errorHandler';
-import { Amonestation, AmonestationForm } from '@/types/amonestations';
 import { Club } from '@/types/clubs';
 import { configFormSchema } from '@/types/config';
-import { MatchData, PlayersOnMatch } from '@/types/matches';
-import { Multa, MultaForm } from '@/types/payments';
-import { Player, PlayerWithoutId } from '@/types/players';
-import axios, { AxiosResponse } from 'axios';
+import axios from 'axios';
 import { z } from 'zod';
+
+export default async function createFetcher<FormType, Data>(url: string, { arg }: { arg: FormType }) {
+  try {
+    const { data } = await axios.post<Data>(url, arg);
+
+    return data;
+  } catch (error) {
+    handleFetchError(error);
+  }
+}
 
 export async function createClubFetcher(url: string, { arg }: { arg: FormData }) {
   try {
@@ -22,40 +28,6 @@ export async function createClubFetcher(url: string, { arg }: { arg: FormData })
   }
 }
 
-export async function createPlayersFetcher(url: string, { arg }: { arg: PlayerWithoutId[] }) {
-  try {
-    const response: AxiosResponse<Player[]> = await axios.post<Player[]>(url, arg);
-    return response.data;
-  } catch (error) {
-    handleFetchError(error);
-  }
-}
-
-export async function createMultasFetcher(url: string, { arg }: { arg: MultaForm }) {
-  try {
-    const response: AxiosResponse<Multa> = await axios.post<Multa>(url, arg);
-    return response.data;
-  } catch (error) {
-    handleFetchError(error);
-  }
-}
-
-export async function createAmonestationFetcher(url: string, { arg }: { arg: Omit<AmonestationForm, 'sanction'> }) {
-  try {
-    const response: AxiosResponse<Amonestation> = await axios.post<Amonestation>(url, arg);
-    return response.data;
-  } catch (error) {
-    handleFetchError(error);
-  }
-}
-export async function createPlayerMatchFetcher(url: string, { arg }: { arg: MatchData }) {
-  try {
-    const response: AxiosResponse<PlayersOnMatch> = await axios.post<PlayersOnMatch>(url, arg);
-    return response.data;
-  } catch (error) {
-    handleFetchError(error);
-  }
-}
 export async function generateFixtureFetcher(url: string) {
   try {
     const response = await axios.post(url);

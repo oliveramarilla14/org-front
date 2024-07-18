@@ -1,10 +1,10 @@
 import Layout from '@/Layouts/Layout';
-import { createPlayersFetcher } from '@/api/create';
+import createFetcher from '@/api/create';
 import { Button } from '@/components/ui/button';
 import PlayersForm from '@/components/views/players/PlayersForm';
 import PlayersCreateTable from '@/components/views/players/PlayersTable';
 import { apiUri } from '@/config/config';
-import { PlayerWithoutId } from '@/types/players';
+import { Player, PlayerWithoutId } from '@/types/players';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useSWRMutation from 'swr/mutation';
@@ -22,7 +22,10 @@ import {
 
 export default function PlayerCreate() {
   const [players, setPlayers] = useState<PlayerWithoutId[]>([]);
-  const { trigger, error, isMutating } = useSWRMutation(`${apiUri}/players/create`, createPlayersFetcher);
+  const { trigger, error, isMutating } = useSWRMutation(
+    `${apiUri}/players/create`,
+    createFetcher<PlayerWithoutId[], Player[]>
+  );
   const navigate = useNavigate();
 
   const handleSave = async () => {

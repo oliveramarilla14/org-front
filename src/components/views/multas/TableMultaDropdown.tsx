@@ -23,7 +23,7 @@ import { Multa } from '@/types/payments';
 import { DropdownMenuSeparator } from '@radix-ui/react-dropdown-menu';
 import useSWRMutation from 'swr/mutation';
 
-import { deleteCuotaFetcher } from '@/api/delete';
+import { deleteByIdFetcher } from '@/api/delete';
 import { mutate } from 'swr';
 import { DialogTrigger } from '@radix-ui/react-dialog';
 import { useState } from 'react';
@@ -37,7 +37,7 @@ type Props = {
 export default function TableMultaDropdown({ multa, variant }: Props) {
   const { trigger: triggerCancel } = useSWRMutation(`${apiUri}/payments/multas`, handleCancelPayCuota);
   const { trigger: triggerPay } = useSWRMutation(`${apiUri}/payments/multas`, handlePayCuota);
-  const { trigger: triggerDelete } = useSWRMutation(`${apiUri}/payments/multas`, deleteCuotaFetcher);
+  const { trigger: triggerDelete } = useSWRMutation(`${apiUri}/payments/multas`, deleteByIdFetcher);
   const [openModal, setOpenModal] = useState(false);
   const nav = useNavigate();
   return (

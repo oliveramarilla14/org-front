@@ -1,4 +1,4 @@
-import { deletePlayerFetcher as fetcher } from '@/api/delete';
+import { deleteByIdFetcher } from '@/api/delete';
 import ActionModal from '@/components/modals/ActionModal';
 import { Button } from '@/components/ui/button';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
@@ -17,7 +17,7 @@ interface Props {
 export default function PlayersDataTable({ players }: Props) {
   const { id } = useParams();
   const { mutate } = useSWRConfig();
-  const { trigger } = useSWRMutation(`${apiUri}/players`, fetcher);
+  const { trigger } = useSWRMutation(`${apiUri}/players`, deleteByIdFetcher);
   const [deleteId, setDeleteId] = useState(0);
   const [deleteModal, setDeleteModal] = useState(false);
 

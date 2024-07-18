@@ -7,7 +7,7 @@ import { TeamShow } from '@/types/clubs';
 import { Dispatch, SetStateAction, useState } from 'react';
 import ActionModal from '@/components/modals/ActionModal';
 import useSWRMutation from 'swr/mutation';
-import { deleteClubFetcher as fetcher } from '@/api/delete';
+import deleteFetcher from '@/api/delete';
 import { useNavigate } from 'react-router-dom';
 
 type Props = {
@@ -16,7 +16,7 @@ type Props = {
 };
 
 export default function ClubShowInfo({ club, setOpenEdit }: Props) {
-  const { trigger } = useSWRMutation(`${apiUri}/clubs/${club.id}`, fetcher);
+  const { trigger } = useSWRMutation(`${apiUri}/clubs/${club.id}`, deleteFetcher);
   const [openDelete, setOpenDelete] = useState(false);
   const nav = useNavigate();
 

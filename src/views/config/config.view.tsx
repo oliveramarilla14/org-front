@@ -6,7 +6,7 @@ import { configType } from '@/types/config';
 import ConfigForm from '@/components/views/config/ConfigForm';
 import { Button } from '@/components/ui/button';
 import useSWRMutation from 'swr/mutation';
-import { deleteDefault } from '@/api/delete';
+import deleteFetcher from '@/api/delete';
 import ActionModal from '@/components/modals/ActionModal';
 import { useState } from 'react';
 import { CheckIcon } from 'lucide-react';
@@ -14,7 +14,7 @@ import { useToast } from '@/components/ui/use-toast';
 
 export default function ConfigView() {
   const { data: config, isLoading } = useSWR<configType>(`${apiUri}/config`);
-  const { trigger } = useSWRMutation(`${apiUri}/matches/fixture`, deleteDefault);
+  const { trigger } = useSWRMutation(`${apiUri}/matches/fixture`, deleteFetcher);
   const [openDelete, setOpenDelete] = useState(false);
   const { toast } = useToast();
 

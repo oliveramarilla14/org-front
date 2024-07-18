@@ -21,7 +21,7 @@ import { apiUri } from '@/config/config';
 import { DropdownMenuSeparator } from '@radix-ui/react-dropdown-menu';
 import useSWRMutation from 'swr/mutation';
 
-import { deleteAmonestationFetcher } from '@/api/delete';
+import { deleteByIdFetcher } from '@/api/delete';
 import { mutate } from 'swr';
 import { DialogTrigger } from '@radix-ui/react-dialog';
 import { useState } from 'react';
@@ -33,7 +33,7 @@ type Props = {
 };
 
 export default function TableAmonestationDropdown({ amonestation }: Props) {
-  const { trigger: triggerDelete } = useSWRMutation(`${apiUri}/amonestations`, deleteAmonestationFetcher);
+  const { trigger: triggerDelete } = useSWRMutation(`${apiUri}/amonestations`, deleteByIdFetcher);
   const [openModal, setOpenModal] = useState(false);
   const nav = useNavigate();
 
