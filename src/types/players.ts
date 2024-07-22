@@ -1,6 +1,7 @@
 import { z } from 'zod';
 import { Payment } from './payments';
 import { Club } from './clubs';
+import { Amonestation } from './amonestations';
 
 export interface Player {
   id: number;
@@ -39,6 +40,11 @@ export interface PlayerStatsWithData extends PlayerStats {
 export interface PlayerStatsPayments extends Player {
   payments: Payment[];
   Stats: PlayerStats | null;
+}
+
+export interface PlayersFixtureData extends Player {
+  amonestations: Amonestation[];
+  payments: Payment[];
 }
 
 export const playerFormSchema = z.object({

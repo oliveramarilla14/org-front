@@ -11,9 +11,10 @@ import { PlayerS, StatType } from '@/types/matches';
 interface Props {
   player: PlayerS;
   team: '1' | '2';
+  unavailable: boolean;
 }
 
-export default function TableRowPlayer({ player, team }: Props) {
+export default function TableRowPlayer({ player, team, unavailable = false }: Props) {
   const stats: StatType[] = ['goals', 'yellows', 'reds'];
   const { dispatch, state } = useContext(MatchDataContext);
 
@@ -50,7 +51,7 @@ export default function TableRowPlayer({ player, team }: Props) {
 
   return (
     <TableRow key={player.id}>
-      <TableCell>{player.name}</TableCell>
+      <TableCell className={`${unavailable ? 'text-destructive font-bold' : ''}`}>{player.name}</TableCell>
       <TableCell>{player.ci}</TableCell>
       <TableCell>{player.goals}</TableCell>
       <TableCell>{player.yellows}</TableCell>

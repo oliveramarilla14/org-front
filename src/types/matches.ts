@@ -1,5 +1,5 @@
 import { Club } from './clubs';
-import { Player } from './players';
+import { Player, PlayersFixtureData } from './players';
 
 export interface Match {
   id: number;
@@ -13,7 +13,7 @@ export interface Match {
 }
 
 interface ClubPlayers extends Club {
-  players: Player[];
+  players: PlayersFixtureData[];
 }
 
 export interface finishTeamPlayer {
