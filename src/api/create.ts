@@ -10,6 +10,7 @@ export default async function createFetcher<FormType, Data>(url: string, { arg }
 
     return data;
   } catch (error) {
+    console.log(error);
     handleFetchError(error);
   }
 }

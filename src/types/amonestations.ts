@@ -9,6 +9,7 @@ export interface Amonestation {
   matchId: number | null;
   paymentId: number | null;
   type: string;
+  paid: boolean;
   observation: string | null;
   pointsDeducted: number | null;
   matchesToPay: number | null;

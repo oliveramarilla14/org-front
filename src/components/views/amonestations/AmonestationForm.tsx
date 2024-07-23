@@ -37,17 +37,19 @@ export default function AmonestationForm({ amonestation, isMutating, children, o
   });
   const navigate = useNavigate();
   const clubId = form.watch('clubId');
-  const type = form.watch('sanction');
+  const sancion = form.watch('sanction');
 
   async function onSubmit(values: AmonestationFormType) {
-    if (type === 'partidos') {
+    if (sancion === 'partidos') {
+      values.pointsDeducted = undefined;
       if (values.matchesToPay === '') {
         form.setError('matchesToPay', { type: 'custom', message: 'Ingrese un valor' });
         return;
       }
     }
 
-    if (type === 'puntos') {
+    if (sancion === 'puntos') {
+      values.matchesToPay = undefined;
       if (values.pointsDeducted === '') {
         form.setError('pointsDeducted', { type: 'custom', message: 'Ingrese un valor' });
         return;
@@ -56,7 +58,7 @@ export default function AmonestationForm({ amonestation, isMutating, children, o
 
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const { sanction, ...valuesWithoutSanction } = values;
-
+    console.log(values);
     await trigger(valuesWithoutSanction);
     onSave();
   }
@@ -174,7 +176,7 @@ export default function AmonestationForm({ amonestation, isMutating, children, o
             </FormItem>
           )}
         />
-        {type === 'puntos' ? (
+        {sancion === 'puntos' && (
           <FormField
             control={form.control}
             name='pointsDeducted'
@@ -188,22 +190,21 @@ export default function AmonestationForm({ amonestation, isMutating, children, o
               </FormItem>
             )}
           />
-        ) : (
-          type === 'partidos' && (
-            <FormField
-              control={form.control}
-              name='matchesToPay'
-              render={({ field }) => (
-                <FormItem>
-                  <FormLabel>Cantidad de partidos</FormLabel>
-                  <FormControl>
-                    <Input placeholder='0' type='number' {...field} />
-                  </FormControl>
-                  <FormMessage />
-                </FormItem>
-              )}
-            />
-          )
+        )}
+        {sancion === 'partidos' && (
+          <FormField
+            control={form.control}
+            name='matchesToPay'
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel>Cantidad de partidos</FormLabel>
+                <FormControl>
+                  <Input placeholder='0' type='number' {...field} />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
         )}
 
         <FormField

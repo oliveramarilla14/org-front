@@ -55,13 +55,13 @@ export const amonestationsColumns: ColumnDef<Amonestation>[] = [
     header: sortableHeader<Amonestation>('Cumplió'),
     id: 'accomplishment',
     accessorFn: (row) => {
-      if (row.pointsDeducted) return row.matchesPaid === 1 ? ' Descontado' : 'Pendiente';
+      if (row.pointsDeducted) return row.paid ? ' Descontado' : 'Pendiente';
       else return `${row.matchesPaid}/${row.matchesToPay}`;
     }
   },
 
   {
-    header: sortableHeader<Amonestation>('Pago'),
+    header: sortableHeader<Amonestation>('Multa'),
     id: 'payed',
     accessorFn: (row) => {
       if (row.paymentId) return 'Si';
