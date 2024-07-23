@@ -7,9 +7,11 @@ import { Link } from 'react-router-dom';
 export default function Header() {
   return (
     <header className='flex mt-4 px-10'>
-      <Link to='/' className='gradient-text-style flex-1'>
-        Fast Tournament
-      </Link>
+      <div className=' flex-1'>
+        <Link to='/' className='gradient-text-style'>
+          Fast Tournament
+        </Link>
+      </div>
       <div className='flex gap-4'>
         <ModeToggle />
         <Link to='/config' className='gradient-text-style'>
