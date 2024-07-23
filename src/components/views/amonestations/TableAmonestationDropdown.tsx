@@ -1,4 +1,4 @@
-import { FilePenLine, MoreHorizontal, Trash } from 'lucide-react';
+import { CircleDollarSign, CircleX, FilePenLine, MoreHorizontal, Trash } from 'lucide-react';
 import {
   Dialog,
   DialogClose,
@@ -27,13 +27,17 @@ import { DialogTrigger } from '@radix-ui/react-dialog';
 import { useState } from 'react';
 import { Amonestation } from '@/types/amonestations';
 import { useNavigate } from 'react-router-dom';
+import { handleCancelPayAmonestation, handlePayAmonestation } from '@/api/pay';
 
 type Props = {
   amonestation: Amonestation;
+  variant: 'paid' | 'cancel';
 };
 
-export default function TableAmonestationDropdown({ amonestation }: Props) {
+export default function TableAmonestationDropdown({ amonestation, variant }: Props) {
   const { trigger: triggerDelete } = useSWRMutation(`${apiUri}/amonestations`, deleteByIdFetcher);
+  const { trigger: triggerCancel } = useSWRMutation(`${apiUri}/amonestations`, handleCancelPayAmonestation);
+  const { trigger: triggerPay } = useSWRMutation(`${apiUri}/amonestations`, handlePayAmonestation);
   const [openModal, setOpenModal] = useState(false);
   const nav = useNavigate();
 
@@ -56,22 +60,37 @@ export default function TableAmonestationDropdown({ amonestation }: Props) {
           <DropdownMenuContent align='end'>
             <DropdownMenuLabel>Acciones</DropdownMenuLabel>
 
-            <DropdownMenuItem onClick={() => nav(`./${amonestation.id}/edit`)} className='cursor-pointer'>
-              <FilePenLine className='me-1' /> Editar
-            </DropdownMenuItem>
-            <DropdownMenuSeparator />
-            <DialogTrigger asChild>
-              <DropdownMenuItem className='cursor-pointer'>
-                <Trash className='me-1' />
-                Eliminar
+            {variant === 'paid' && (
+              <DropdownMenuItem onClick={() => triggerCancel(amonestation.id)} className='cursor-pointer'>
+                <CircleX className='me-1' /> Cancelar amonestación
               </DropdownMenuItem>
-            </DialogTrigger>
+            )}
+            {variant === 'cancel' && amonestation.pointsDeducted && (
+              <DropdownMenuItem onClick={() => triggerPay(amonestation.id)} className='cursor-pointer'>
+                <CircleDollarSign className='me-1' /> Descontar puntos
+              </DropdownMenuItem>
+            )}
+
+            {variant === 'cancel' && (
+              <>
+                <DropdownMenuItem onClick={() => nav(`./${amonestation.id}/edit`)} className='cursor-pointer'>
+                  <FilePenLine className='me-1' /> Editar
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DialogTrigger asChild>
+                  <DropdownMenuItem className='cursor-pointer'>
+                    <Trash className='me-1' />
+                    Eliminar
+                  </DropdownMenuItem>
+                </DialogTrigger>
+              </>
+            )}
           </DropdownMenuContent>
         </DropdownMenu>
 
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Eliminar Cuota?</DialogTitle>
+            <DialogTitle>Eliminar amonestación?</DialogTitle>
             <DialogDescription>Esta acción no se puede deshacer.</DialogDescription>
           </DialogHeader>
           <DialogFooter>

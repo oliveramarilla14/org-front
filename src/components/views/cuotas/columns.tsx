@@ -12,7 +12,8 @@ export const cuotaColumns: ColumnDef<Cuota>[] = [
     },
     meta: {
       filterVariant: 'number'
-    }
+    },
+    sortingFn: 'alphanumeric'
   },
   {
     header: sortableHeader<Cuota>('Nombre'),

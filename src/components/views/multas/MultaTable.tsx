@@ -22,7 +22,12 @@ interface Props<TData, TValue> {
 }
 
 export default function MultaTable<TData, TValue>({ data, columns }: Props<TData, TValue>) {
-  const [sorting, setSorting] = useState<SortingState>([]);
+  const [sorting, setSorting] = useState<SortingState>([
+    {
+      id: 'id',
+      desc: true
+    }
+  ]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const table = useReactTable({
@@ -41,6 +46,14 @@ export default function MultaTable<TData, TValue>({ data, columns }: Props<TData
     state: {
       sorting,
       columnFilters
+    },
+    initialState: {
+      sorting: [
+        {
+          id: 'id',
+          desc: true // sort by name in descending order by default
+        }
+      ]
     }
   });
 

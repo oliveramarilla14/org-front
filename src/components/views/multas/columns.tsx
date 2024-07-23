@@ -12,7 +12,8 @@ export const multaColumns: ColumnDef<Multa>[] = [
     },
     meta: {
       filterVariant: 'number'
-    }
+    },
+    sortingFn: 'alphanumeric'
   },
   {
     header: sortableHeader<Multa>('Nombre'),

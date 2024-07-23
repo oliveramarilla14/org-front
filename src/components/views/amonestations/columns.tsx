@@ -13,7 +13,8 @@ export const amonestationsColumns: ColumnDef<Amonestation>[] = [
     },
     meta: {
       filterVariant: 'number'
-    }
+    },
+    sortingFn: 'alphanumeric'
   },
   {
     header: sortableHeader<Amonestation>('Nombre'),
@@ -84,8 +85,11 @@ export const amonestationsColumns: ColumnDef<Amonestation>[] = [
     id: 'actions',
     cell: ({ row }) => {
       const amonestation = row.original;
-
-      return <TableAmonestationDropdown amonestation={amonestation} />;
+      if (row.original.pointsDeducted)
+        return (
+          <TableAmonestationDropdown amonestation={amonestation} variant={row.original.paid ? 'paid' : 'cancel'} />
+        );
+      else return <TableAmonestationDropdown amonestation={amonestation} variant='cancel' />;
     },
     enableColumnFilter: false
   }

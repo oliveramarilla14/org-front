@@ -23,7 +23,12 @@ interface Props<TData, TValue> {
 }
 
 export default function AmonestationTable<TData, TValue>({ data, columns, empty }: Props<TData, TValue>) {
-  const [sorting, setSorting] = useState<SortingState>([]);
+  const [sorting, setSorting] = useState<SortingState>([
+    {
+      id: 'id',
+      desc: true
+    }
+  ]);
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
   const table = useReactTable({
