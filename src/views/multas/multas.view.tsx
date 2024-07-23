@@ -10,7 +10,7 @@ export default function MultasView() {
 
   return (
     <Layout title='Pagos' isLoading={isLoading} create>
-      <PaymentsTable data={multas ?? []} columns={multaColumns} empty='No existen registros de cuotas.' />
+      <PaymentsTable data={multas ?? []} columns={multaColumns} empty='No existen registros de pagos.' />
     </Layout>
   );
 }

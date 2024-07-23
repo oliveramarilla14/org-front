@@ -5,7 +5,7 @@ declare module '@tanstack/react-table' {
   //los tipos no se usan, pero al extender una interface debe mantenerse el tipado
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   interface ColumnMeta<TData extends RowData, TValue> {
-    filterVariant?: 'text' | 'range' | 'select' | 'boolean';
+    filterVariant?: 'text' | 'range' | 'select' | 'boolean' | 'number';
   }
 
   interface FilterFns {

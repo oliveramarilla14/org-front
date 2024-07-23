@@ -5,6 +5,16 @@ import { sortableHeader } from '@/helpers/tableHelpers';
 
 export const cuotaColumns: ColumnDef<Cuota>[] = [
   {
+    header: sortableHeader<Cuota>('#'),
+    accessorKey: 'id',
+    accessorFn: (row) => {
+      return row.id.toString();
+    },
+    meta: {
+      filterVariant: 'number'
+    }
+  },
+  {
     header: sortableHeader<Cuota>('Nombre'),
     accessorKey: 'Player.name',
     accessorFn: (row) => row.Player?.name || 'Eliminado!'

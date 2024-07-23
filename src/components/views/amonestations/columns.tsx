@@ -6,6 +6,16 @@ import TableAmonestationDropdown from './TableAmonestationDropdown';
 
 export const amonestationsColumns: ColumnDef<Amonestation>[] = [
   {
+    header: sortableHeader<Amonestation>('#'),
+    accessorKey: 'id',
+    accessorFn: (row) => {
+      return row.id.toString();
+    },
+    meta: {
+      filterVariant: 'number'
+    }
+  },
+  {
     header: sortableHeader<Amonestation>('Nombre'),
     accessorKey: 'Player.name',
     accessorFn: (row) => row.Player?.name || 'Todo el equipo'

@@ -5,6 +5,16 @@ import TableMultaDropdown from './TableMultaDropdown';
 
 export const multaColumns: ColumnDef<Multa>[] = [
   {
+    header: sortableHeader<Multa>('#'),
+    accessorKey: 'id',
+    accessorFn: (row) => {
+      return row.id.toString();
+    },
+    meta: {
+      filterVariant: 'number'
+    }
+  },
+  {
     header: sortableHeader<Multa>('Nombre'),
     accessorKey: 'Player.name',
     accessorFn: (row) => row.Player?.name || 'Todo el Equipo'

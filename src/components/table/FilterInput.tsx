@@ -48,6 +48,15 @@ export default function FilterInput<TData>({ column }: Props<TData>) {
         })}
       </SelectContent>
     </Select>
+  ) : filterVariant === 'number' ? (
+    <Input
+      className='max-w-14 '
+      type='number'
+      onChange={(val) => {
+        column.setFilterValue(val.target.value);
+      }}
+      value={(columnFilterValue ?? '') as number}
+    />
   ) : (
     <Input
       className='max-w-40 '

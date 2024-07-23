@@ -14,10 +14,12 @@ export default function MatchPlayersUnavailable({ match, team }: Props) {
     match.FirstTeam.players.forEach((player) => {
       if (player.amonestations.length > 0) {
         data.push(player);
+        return;
       }
 
       if (player.payments.length > 0) {
         data.push(player);
+        return;
       }
     });
   }
@@ -26,10 +28,12 @@ export default function MatchPlayersUnavailable({ match, team }: Props) {
     match.SecondTeam.players.forEach((player) => {
       if (player.amonestations.length > 0) {
         data.push(player);
+        return;
       }
 
       if (player.payments.length > 0) {
         data.push(player);
+        return;
       }
     });
   }
